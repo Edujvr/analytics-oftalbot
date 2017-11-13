@@ -1,14 +1,14 @@
 const express = require('express');
-const app1 = express();
-app1.use(require('body-parser').json());
+const app = express();
+app.use(require('body-parser').json());
 
-app1.post('/webhook/ai', (req, res, next) => {
-    
+const router = express.Router();
+
+
+router.post('/webhook/ai', (req, res, next) => {  
   const action = req.body.results.action; // 'track_event'
-   console.log(action+'Est es la accion que llega');
-  switch(action) {
-   
-    case'track_event':
+  switch(action) {   
+    case 'track_event':
         const url = 'https://www.google-analytics.com/collect?v=1&t=event&tid<UA-109367761-1>&cid=${request.body.sessionId}&dh<https://www.google-analytics.com>&ec=Intent&ea=${request.body.result.metadata.intentName}&ev=1&aip=1';
         require('request').get(url)
         .then(err => {
