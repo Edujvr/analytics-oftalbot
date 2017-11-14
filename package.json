@@ -15,6 +15,7 @@
   "dependencies": {
     "body-parser": "1.18.2",
     "express": "3.4.6",
+    "router": "1.3.2",
     "request": "^1.5.x",
     "actions-on-google": "^1.5.x",
     "firebase-admin": "^4.2.1",
