@@ -6,7 +6,7 @@ app.use(require('body-parser').json());
 
 const router = express.Router();
 
-app.post('/web', (req, res, next) => {  
+router.post('/web', (req, res, next) => {  
   const action = req.body.result.action;
   switch(action) {   
     case 'track_event':
