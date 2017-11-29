@@ -13,8 +13,8 @@ console.log('entro aqui');
   console.log(action);
   switch(action) {   
     case 'prueba':
-        const url = 'https://www.google-analytics.com/collect?v=1&t=event&tid=UA-109367761-1&cid=${request.body.sessionId}&dh=www.google-analytics.com&ec=Intent&ea=${request.body.result.metadata.intentName}&ev=1&aip=1';
-        var request = require('request');
+        const url = 'https://www.google-analytics.com/collect?v=1&t=event&tid=UA-109367761-1&cid=${'+request.body.sessionId+'}&dh=www.google-analytics.com&ec=Intent&ea=${'+request.body.result.metadata.intentName+'}&ev=1&aip=1';
+     	var request = require('request');
 		request.get(encodeURI(url))
         .on('error', function(err){
           if (err) throw err;
