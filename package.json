@@ -1,17 +1,21 @@
 {
-  "name": "dialogflowFirebaseFulfillment",
-  "description": "This is the default fulfillment for a Dialogflow agents using Cloud Functions for Firebase",
-  "version": "0.0.1",
-  "private": true,
-  "license": "Apache Version 2.0",
-  "author": "Google Inc.",
-  "engines": {
-    "node": "~6.0"
+  "name": "apiai-nodejs-webhook-sample",
+  "version": "1.0.0",
+  "description": "a sample webhook (with authentication) for api.ai",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/supermamon/apiai-nodejs-webhook-sample.git"
   },
+  "main": "index.js",
   "scripts": {
-    "start": "firebase serve --only functions:dialogflowFirebaseFulfillment",
-    "deploy": "firebase deploy --only functions:dialogflowFirebaseFulfillment"
+    "start": "node index.js"
   },
+  "keywords": [
+    "apiai",
+    "webhook"
+  ],
+  "author": "Raymond Velasquez <at.supermamon@gmail.com> (https://supermamon.com)",
+  "license": "ISC",
   "dependencies": {
     "body-parser": "1.18.2",
     "express": "3.4.6",
@@ -21,5 +25,13 @@
     "firebase-admin": "^4.2.1",
     "firebase-functions": "^0.5.7",
     "apiai": "^4.0.3"
-  }
+  },
+  "engines": {
+    "node": "8.1.4"
+  },
+  "bugs": {
+    "url": "https://github.com/supermamon/apiai-nodejs-webhook-sample/issues"
+  },
+  "homepage": "https://github.com/supermamon/apiai-nodejs-webhook-sample#readme",
+  "devDependencies": {}
 }
