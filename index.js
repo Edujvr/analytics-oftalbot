@@ -19,16 +19,16 @@ console.log('entro aqui');
         .on('error', function(err){
           if (err) throw err;
 	  console.log('Successfully logged to GA , Responde a Api.ai');
-          res.json({
+        });
+	console.log('Termina el Proceso');
+		  
+		  res.json({
             messages: req.body.result.fulfillment.messages,
             speech: req.body.result.fulfillment.speech,
             displayText: req.body.result.fulfillment.speech,
             contextOut: req.body.result.contexts,
             source: req.body.result.source
           });
-
-        });
-	console.log('Termina el Proceso');
       break; 
   }
 });
