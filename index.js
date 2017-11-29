@@ -18,8 +18,7 @@ console.log('entro aqui');
 		request.get(encodeURI(url))
         .on('error', function(err){
           if (err) throw err;
-          else{
-			  console.log('Successfully logged to GA');
+	  console.log('Successfully logged to GA');
           res.json({
             messages: req.body.result.fulfillment.messages,
             speech: req.body.result.fulfillment.speech,
@@ -27,7 +26,7 @@ console.log('entro aqui');
             contextOut: req.body.result.contexts,
             source: req.body.result.source
           });
-		  }
+
         });
       break; 
   }
