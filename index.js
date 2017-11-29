@@ -18,7 +18,7 @@ console.log('entro aqui');
 		request.get(encodeURI(url))
         .on('error', function(err){
           if (err) throw err;
-	  console.log('Successfully logged to GA');
+	  console.log('Successfully logged to GA , Responde a Api.ai');
           res.json({
             messages: req.body.result.fulfillment.messages,
             speech: req.body.result.fulfillment.speech,
@@ -28,6 +28,7 @@ console.log('entro aqui');
           });
 
         });
+	console.log('Termina el Proceso');
       break; 
   }
 });
