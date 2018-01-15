@@ -35,7 +35,7 @@ app.post("/webhook", (req, res, next) => {
             displayText: req.body.result.fulfillment.speech,
             contextOut: req.body.result.contexts,
             source: req.body.result.source
-          });
+          }); 
       break; 
   }
 });
