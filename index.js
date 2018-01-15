@@ -4,25 +4,32 @@ const express = require('express');
 const app = express();
 app.use(require('body-parser').json());
 app.listen(process.env.PORT || 8080);
-console.log('Inicio el programa');
-const router = express.Router();
+var chatbase = require('@google/chatbase');
 
 app.post("/webhook", (req, res, next) => {  
-console.log('entro aqui');
   const action = req.body.result.action;
-  console.log(action);
   switch(action) {   
-    case 'prueba':
-        const url = 'https://www.google-analytics.com/collect?v=1&t=event&tid=UA-109367761-1&cid='+req.body.sessionId+'&dh=www.google-analytics.com&ec=Intent&ea='+req.body.result.metadata.intentName+'&ev=1&aip=1&ul='+req.body.lang+'';
+    case 'control':
+//Envio de información a Chatbase libreria @google/chatbase
+	var msg = chatbase.newMessage('da9339a8-3149-4788-b348-8ddf5a3046a7', req.body.sessionId)
+	.setPlatform('Dialogflow') 
+	.setMessage(req.body.result.resolvedQuery) 
+	.setIntent(req.body.result.metadata.intentName)  
+	.setVersion('1.0') 
+	.setMessageId(req.body.id) 
+	.send()
+	.then(msg => console.log(msg.getCreateResponse()))
+	.catch(err => console.error(err));
+//Envio de información a Google Analytics libreria request
+	const url = 'https://www.google-analytics.com/collect?v=1&t=event&tid=UA-109367761-1&cid='+req.body.sessionId+'&dh=www.google-analytics.com&ec=Intento&ea='+req.body.result.metadata.intentName+'&el='+req.body.result.resolvedQuery+'&ev=1&aip=1';
      	var request = require('request');
 		request.get(encodeURI(url))
-        .on('error', function(err){
-          if (err) throw err;
-	  console.log('Successfully logged to GA , Responde a Api.ai');
+       		.on('error', function(err){
+          	if (err) throw err;
+	  	console.log('Successfully logged to GA , Response to Dialogflow');
         });
-	console.log('Termina el Proceso');
-		  
-		  res.json({
+//Envio de información webhook a Dialogflow		  
+	res.json({
             messages: req.body.result.fulfillment.messages,
             speech: req.body.result.fulfillment.speech,
             displayText: req.body.result.fulfillment.speech,
