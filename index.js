@@ -38,14 +38,14 @@ app.post("/webhook", (req, res, next) => {
           }); 
       break; 
 	case 'nothandled':
-//Envio de información a Chatbase mensaje de usuario no administrado
-	/*var msg = chatbase.newMessage('c0f0424f-cf81-4f54-8287-006327e7bf4d', req.body.sessionId)
+//Envio de información a Chatbase libreria @google/chatbase
+	var msg = chatbase.newMessage('c0f0424f-cf81-4f54-8287-006327e7bf4d', req.body.sessionId)
 	.setPlatform('Dialogflow') 
 	.setMessage(req.body.result.resolvedQuery) 
 	.setIntent(req.body.result.metadata.intentName)  
-	.setVersion('1.0') 
+	.setVersion('1.0')
+	.setAsNotHandled(true)
 	.setMessageId(req.body.id) 
-	.setAsNotHandled('true')
 	.send()
 	.then(msg => console.log(msg.getCreateResponse()))
 	.catch(err => console.error(err));
@@ -64,7 +64,7 @@ app.post("/webhook", (req, res, next) => {
             displayText: req.body.result.fulfillment.speech,
             contextOut: req.body.result.contexts,
             source: req.body.result.source
-          }); */
+          }); 
       break; 
   }
 });
