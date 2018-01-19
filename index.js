@@ -44,14 +44,14 @@ app.post("/webhook", (req, res, next) => {
 	.setMessage(req.body.result.resolvedQuery) 
 	.setIntent(req.body.result.metadata.intentName)  
 	.setVersion('1.0')
-	//.setAsNotHandled(true)
+	.setAsNotHandled(true)
 	.setMessageId(req.body.id) 
 	.send()
 	.then(msg => console.log(msg.getCreateResponse()))
 	.catch(err => console.error(err));
 //Envio de información a Google Analytics libreria request
-	const url = 'https://www.google-analytics.com/collect?v=1&t=event&tid=UA-109367761-1&cid='+req.body.sessionId+'&dh=www.google-analytics.com&ec=Intento&ea='+req.body.result.metadata.intentName+'&el='+req.body.result.resolvedQuery+'&ev=1&aip=1';     	
-		request.get(encodeURI(url))
+	const url2 = 'https://www.google-analytics.com/collect?v=1&t=event&tid=UA-109367761-1&cid='+req.body.sessionId+'&dh=www.google-analytics.com&ec=Intento&ea='+req.body.result.metadata.intentName+'&el='+req.body.result.resolvedQuery+'&ev=1&aip=1';     	
+		request.get(encodeURI(url2))
        		.on('error', function(err){
           	if (err) throw err;
 	  	console.log('Successfully logged to GA , Response to Dialogflow');
