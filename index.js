@@ -37,7 +37,7 @@ app.post("/webhook", (req, res, next) => {
             source: req.body.result.source
           }); 
       break; 
-	case 'nothandled':
+/*	case 'nothandled':
 //Envio de información a Chatbase mensaje de usuario no administrado
 	var msg = chatbase.newMessage('c0f0424f-cf81-4f54-8287-006327e7bf4d', req.body.sessionId)
 	.setPlatform('Dialogflow') 
@@ -65,6 +65,6 @@ app.post("/webhook", (req, res, next) => {
             contextOut: req.body.result.contexts,
             source: req.body.result.source
           }); 
-      break; 
+      break; */
   }
 });
