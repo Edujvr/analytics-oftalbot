@@ -49,6 +49,22 @@ app.post("/webhook", (req, res, next) => {
 	.send()
 	.then(msg => console.log(msg.getCreateResponse()))
 	.catch(err => console.error(err));
+//Envio de información a Google Analytics libreria request
+	const url = 'https://www.google-analytics.com/collect?v=1&t=event&tid=UA-109367761-1&cid='+req.body.sessionId+'&dh=www.google-analytics.com&ec=Intento&ea='+req.body.result.metadata.intentName+'&el='+req.body.result.resolvedQuery+'&ev=1&aip=1';
+     	var request = require('request');
+		request.get(encodeURI(url))
+       		.on('error', function(err){
+          	if (err) throw err;
+	  	console.log('Successfully logged to GA , Response to Dialogflow');
+        });
+//Envio de información webhook a Dialogflow		  
+	res.json({
+            messages: req.body.result.fulfillment.messages,
+            speech: req.body.result.fulfillment.speech,
+            displayText: req.body.result.fulfillment.speech,
+            contextOut: req.body.result.contexts,
+            source: req.body.result.source
+          }); 
       break; 
   }
 });
