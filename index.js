@@ -29,13 +29,13 @@ app.post("/webhook", (req, res, next) => {
 	  	console.log('Successfully logged to GA , Response to Dialogflow');
         });
 //Envio de información webhook a Dialogflow		  
-	/*res.json({
+	res.json({
             messages: req.body.result.fulfillment.messages,
             speech: req.body.result.fulfillment.speech,
             displayText: req.body.result.fulfillment.speech,
             contextOut: req.body.result.contexts,
             source: req.body.result.source
-          });*/ 
+          }); 
       break; 
 	case 'nothandled':
 //Envio de información a Chatbase libreria @google/chatbase
@@ -58,13 +58,13 @@ app.post("/webhook", (req, res, next) => {
 	  	console.log('Successfully logged to GA , Response to Dialogflow');
         });
 //Envio de información webhook a Dialogflow		  
-	res.json({
+	/*res.json({
             messages: req.body.result.fulfillment.messages,
             speech: req.body.result.fulfillment.speech,
             displayText: req.body.result.fulfillment.speech,
             contextOut: req.body.result.contexts,
             source: req.body.result.source
-          }); 
+          });*/ 
       break; 
   }
 });
