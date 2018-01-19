@@ -44,7 +44,7 @@ app.post("/webhook", (req, res, next) => {
 	.setMessage(req.body.result.resolvedQuery) 
 	.setIntent(req.body.result.metadata.intentName)  
 	.setVersion('1.0')
-	//.setAsNotHandled(true)
+	.setAsNotHandled(true)
 	.setMessageId(req.body.id) 
 	.send()
 	.then(msg => console.log(msg.getCreateResponse()))
