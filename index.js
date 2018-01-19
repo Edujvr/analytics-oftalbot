@@ -5,6 +5,7 @@ const app = express();
 app.use(require('body-parser').json());
 app.listen(process.env.PORT || 8080);
 var chatbase = require('@google/chatbase');
+var request = require('request');
 
 app.post("/webhook", (req, res, next) => {  
   const action = req.body.result.action;
@@ -22,7 +23,6 @@ app.post("/webhook", (req, res, next) => {
 	.catch(err => console.error(err));
 //Envio de información a Google Analytics libreria request
 	const url = 'https://www.google-analytics.com/collect?v=1&t=event&tid=UA-109367761-1&cid='+req.body.sessionId+'&dh=www.google-analytics.com&ec=Intento&ea='+req.body.result.metadata.intentName+'&el='+req.body.result.resolvedQuery+'&ev=1&aip=1';
-     	var request = require('request');
 		request.get(encodeURI(url))
        		.on('error', function(err){
           	if (err) throw err;
@@ -50,13 +50,12 @@ app.post("/webhook", (req, res, next) => {
 	.then(msg => console.log(msg.getCreateResponse()))
 	.catch(err => console.error(err));
 //Envio de información a Google Analytics libreria request
-	/*const url = 'https://www.google-analytics.com/collect?v=1&t=event&tid=UA-109367761-1&cid='+req.body.sessionId+'&dh=www.google-analytics.com&ec=Intento&ea='+req.body.result.metadata.intentName+'&el='+req.body.result.resolvedQuery+'&ev=1&aip=1';
-     	var request = require('request');
+	const url = 'https://www.google-analytics.com/collect?v=1&t=event&tid=UA-109367761-1&cid='+req.body.sessionId+'&dh=www.google-analytics.com&ec=Intento&ea='+req.body.result.metadata.intentName+'&el='+req.body.result.resolvedQuery+'&ev=1&aip=1';     	
 		request.get(encodeURI(url))
        		.on('error', function(err){
           	if (err) throw err;
 	  	console.log('Successfully logged to GA , Response to Dialogflow');
-        });*/
+        });
 //Envio de información webhook a Dialogflow		  
 	res.json({
             messages: req.body.result.fulfillment.messages,
