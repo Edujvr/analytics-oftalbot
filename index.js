@@ -11,6 +11,14 @@ app.post("/webhook", (req, res, next) => {
   const action = req.body.result.action;
   switch(action) {   
     case 'control':
+//Envio de información webhook a Dialogflow		  
+	res.json({
+            messages: req.body.result.fulfillment.messages,
+            speech: req.body.result.fulfillment.speech,
+            displayText: req.body.result.fulfillment.speech,
+            contextOut: req.body.result.contexts,
+            source: req.body.result.source
+          }); 	  
 //Envio de información a Chatbase libreria @google/chatbase
 	var msg = chatbase.newMessage('c0f0424f-cf81-4f54-8287-006327e7bf4d', req.body.sessionId)
 	.setPlatform('Dialogflow') 
@@ -28,6 +36,8 @@ app.post("/webhook", (req, res, next) => {
           	if (err) throw err;
 	  	console.log('Successfully logged to GA , Response to Dialogflow');
         });
+      break; 
+	case 'nothandled':
 //Envio de información webhook a Dialogflow		  
 	res.json({
             messages: req.body.result.fulfillment.messages,
@@ -35,9 +45,7 @@ app.post("/webhook", (req, res, next) => {
             displayText: req.body.result.fulfillment.speech,
             contextOut: req.body.result.contexts,
             source: req.body.result.source
-          }); 
-      break; 
-	case 'nothandled':
+          });
 //Envio de información a Chatbase libreria @google/chatbase
 	var msg = chatbase.newMessage('c0f0424f-cf81-4f54-8287-006327e7bf4d', req.body.sessionId)
 	.setPlatform('Dialogflow') 
@@ -56,14 +64,6 @@ app.post("/webhook", (req, res, next) => {
           	if (err) throw err;
 	  	console.log('Successfully logged to GA , Response to Dialogflow');
         });
-//Envio de información webhook a Dialogflow		  
-	res.json({
-            messages: req.body.result.fulfillment.messages,
-            speech: req.body.result.fulfillment.speech,
-            displayText: req.body.result.fulfillment.speech,
-            contextOut: req.body.result.contexts,
-            source: req.body.result.source
-          }); 
       break; 
   }
 });
