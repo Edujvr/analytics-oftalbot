@@ -23,7 +23,7 @@ switch(action) {
  	  
 //Envio de información a Chatbase libreria @google/chatbase
 	var msgUser = chatbase.newMessage('c0f0424f-cf81-4f54-8287-006327e7bf4d', req.body.sessionId)
-	.setAsTypeUser()
+	.setAsTypeUser(true)
 	.setPlatform('Dialogflow') 
 	.setMessage(req.body.result.resolvedQuery) 
 	.setIntent(req.body.result.metadata.intentName)  
@@ -34,7 +34,7 @@ switch(action) {
 	.catch(err => console.error(err));
 		
 	var msgAgent = chatbase.newMessage('c0f0424f-cf81-4f54-8287-006327e7bf4d', req.body.sessionId)
-	.setAsTypeAgent()
+	.setAsTypeAgent(true)
 	.setMessage(req.body.result.fulfillment.speech)
 	.send()
 	.then(msg => console.log(msg.getCreateResponse()))
@@ -51,6 +51,7 @@ switch(action) {
 	case 'nothandled':
 //Envio de información a Chatbase libreria @google/chatbase
 	var msg = chatbase.newMessage('c0f0424f-cf81-4f54-8287-006327e7bf4d', req.body.sessionId)
+	.setAsTypeUser(true)
 	.setPlatform('Dialogflow') 
 	.setMessage(req.body.result.resolvedQuery) 
 	.setIntent(req.body.result.metadata.intentName)  
@@ -62,7 +63,7 @@ switch(action) {
 	.catch(err => console.error(err));
 		
 	var msgAgent = chatbase.newMessage('c0f0424f-cf81-4f54-8287-006327e7bf4d', req.body.sessionId)
-	.setAsTypeAgent()
+	.setAsTypeAgent(true)
 	.setMessage(req.body.result.fulfillment.speech)
 	.send()
 	.then(msg => console.log(msg.getCreateResponse()))
