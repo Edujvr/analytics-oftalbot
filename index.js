@@ -64,7 +64,7 @@ switch(action) {
 	.catch(err => console.error(err));
 		
 	var msgAgent = chatbase.newMessage('c0f0424f-cf81-4f54-8287-006327e7bf4d', req.body.sessionId)
-	.setAsTypeAgent'agent')
+	.setAsTypeAgent('agent')
 	.setIntent(req.body.result.metadata.intentName)
 	.setMessage(req.body.result.fulfillment.speech)
 	.send()
