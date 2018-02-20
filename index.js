@@ -22,7 +22,8 @@ switch(action) {
     case 'control':
  	  
 //Envio de información a Chatbase libreria @google/chatbase
-	var msg = chatbase.newMessage('c0f0424f-cf81-4f54-8287-006327e7bf4d', req.body.sessionId)
+	var msgUser = chatbase.newMessage('c0f0424f-cf81-4f54-8287-006327e7bf4d', req.body.sessionId)
+	.setAsTypeUser()
 	.setPlatform('Dialogflow') 
 	.setMessage(req.body.result.resolvedQuery) 
 	.setIntent(req.body.result.metadata.intentName)  
@@ -31,6 +32,14 @@ switch(action) {
 	.send()
 	.then(msg => console.log(msg.getCreateResponse()))
 	.catch(err => console.error(err));
+		
+	var msgAgent = chatbase.newMessage('c0f0424f-cf81-4f54-8287-006327e7bf4d', req.body.sessionId)
+	.setAsTypeAgent()
+	.setMessage(req.body.result.fulfillment.speech)
+	.send()
+	.then(msg => console.log(msg.getCreateResponse()))
+	.catch(err => console.error(err));
+		
 //Envio de información a Google Analytics libreria request
 	const url = 'https://www.google-analytics.com/collect?v=1&t=event&tid=UA-109367761-1&cid='+req.body.sessionId+'&dh=www.google-analytics.com&ec=Intento&ea='+req.body.result.metadata.intentName+'&el='+req.body.result.resolvedQuery+'&ev=1&aip=1';
 		request.get(encodeURI(url))
@@ -48,6 +57,13 @@ switch(action) {
 	.setVersion('1.0')
 	.setAsNotHandled(true)
 	.setMessageId(req.body.id) 
+	.send()
+	.then(msg => console.log(msg.getCreateResponse()))
+	.catch(err => console.error(err));
+		
+	var msgAgent = chatbase.newMessage('c0f0424f-cf81-4f54-8287-006327e7bf4d', req.body.sessionId)
+	.setAsTypeAgent()
+	.setMessage(req.body.result.fulfillment.speech)
 	.send()
 	.then(msg => console.log(msg.getCreateResponse()))
 	.catch(err => console.error(err));
