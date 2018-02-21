@@ -50,6 +50,7 @@ switch(action) {
 	  .setAsTypeAgent() // This message is the bot response
 	  .setUserId("facebook-user-XYZ") // Same as above
 	  .setTimestamp(Date.now().toString()) // Mandatory
+	  .setIntent(intent)
 	  .setMessage("It's 12 o'clock!"); // Bot response message
 
 	// Send all messages to Chatbase
