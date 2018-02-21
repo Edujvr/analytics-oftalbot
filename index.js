@@ -21,7 +21,48 @@ app.post("/webhook", (req, res, next) => {
 	
 switch(action) {   
     case 'control':
-	const messageSet = chatbase.newMessageSet()
+		
+		var intent = "ASK-CURRENT-TIME"; // This should be actually decoded from the user message!
+
+	// Create a Message Set
+	// See: https://github.com/google/chatbase-node
+	var messageSet = chatbase.newMessageSet()
+	  .setApiKey("c0f0424f-cf81-4f54-8287-006327e7bf4d") // Chatbase API key
+	  .setPlatform("prueba"); // Chat platform name
+
+	// Track the message from the user
+	const userMessage = messageSet.newMessage() // Create a new instance of Message
+	  .setAsTypeUser() // Mark it as a message coming from the human
+	  .setUserId("facebook-user-XYZ") // User ID on the chat platform, or custom ID
+	  .setTimestamp(Date.now().toString()) // Mandatory
+	  .setIntent(intent) // The intent decoded from the user message, if applicable
+	  .setMessage("Do you know the time, please?"); // User message
+
+	// Was the intent successfully decoded?
+	if (intent == "UNKNOWN") {
+	  userMessage.setAsNotHandled(); // Tell Chatbase to mark this user request as "not handled"
+	} else {
+	  userMessage.setAsHandled(); // Mark this request as successfully handled ;)
+	}
+
+	// Track the response message from the bot
+	const botMessage = messageSet.newMessage() // See above
+	  .setAsTypeAgent() // This message is the bot response
+	  .setUserId("facebook-user-XYZ") // Same as above
+	  .setTimestamp(Date.now().toString()) // Mandatory
+	  .setMessage("It's 12 o'clock!"); // Bot response message
+
+	// Send all messages to Chatbase
+	return messageSet.sendMessageSet()
+	  .then(response => {
+	    var createResponse = response.getCreateResponse();
+	    return createResponse.all_succeeded; // "true" if all messages were correctly formatted and have been successfully forwarded
+	  })
+	  .catch(error => {
+	    console.error(error);
+	    return false;
+	  });
+	/*const messageSet = chatbase.newMessageSet()
 	.setApiKey("c0f0424f-cf81-4f54-8287-006327e7bf4d")
 	.setPlatform("Dialogflow");
 
@@ -57,7 +98,7 @@ switch(action) {
 	    console.error(error);
 	    return false;
 	  });
-		
+	*/	
 /*		
  	  
 //Envio de información a Chatbase libreria @google/chatbase
