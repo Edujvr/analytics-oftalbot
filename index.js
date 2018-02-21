@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 app.use(require('body-parser').json());
 app.listen(process.env.PORT || 8080);
-var chatbase = require('@google/chatbase');
+const chatbase = require('@google/chatbase');
 var request = require('request');
 
 app.post("/webhook", (req, res, next) => {  
@@ -22,8 +22,8 @@ switch(action) {
     case 'control':
 		
 	const messageSet = chatbase.newMessageSet()
-	.setApiKey('c0f0424f-cf81-4f54-8287-006327e7bf4d')
-	.setPlatform('Dialogflow');
+	.setApiKey("c0f0424f-cf81-4f54-8287-006327e7bf4d")
+	.setPlatform("Dialogflow");
 
 	const userMessage = messageSet.newMessage() // Create a new instance of Message
 	  .setAsTypeUser() // Mark it as a message coming from the human
