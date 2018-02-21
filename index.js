@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 app.use(require('body-parser').json());
 app.listen(process.env.PORT || 8080);
-const chatbase = require('@google/chatbase');
+
 var request = require('request');
 
 app.post("/webhook", (req, res, next) => {  
@@ -20,13 +20,13 @@ app.post("/webhook", (req, res, next) => {
 	
 switch(action) {   
     case 'control':
-		
+	const chatbase = require('@google/chatbase');
 	const messageSet = chatbase.newMessageSet()
 	.setApiKey("c0f0424f-cf81-4f54-8287-006327e7bf4d")
 	.setPlatform("Dialogflow");
 
 	const userMessage = messageSet.newMessage() // Create a new instance of Message
-	  .setAsTypeUser() // Mark it as a message coming from the human
+	  .setAsTypeUser(true) // Mark it as a message coming from the human
 	  .setUserId(req.body.sessionId) // User ID on the chat platform, or custom ID
 	  .setIntent(req.body.result.metadata.intentName) // The intent decoded from the user message, if applicable
 	  .setMessage(req.body.result.resolvedQuery); // User message
@@ -40,7 +40,7 @@ switch(action) {
 
 	// Track the response message from the bot
 	const botMessage = messageSet.newMessage() // See above
-	  .setAsTypeAgent() // This message is the bot response
+	  .setAsTypeAgent(true) // This message is the bot response
 	  .setUserId(req.body.sessionId) // Same as above
 	  .setMessage(req.body.result.fulfillment.messages.speech); // Bot response message
 
@@ -86,6 +86,7 @@ switch(action) {
         });
       break; 
 	case 'nothandled':
+	const chatbase = require('@google/chatbase');
 //Envio de información a Chatbase libreria @google/chatbase
 	var msgUser = chatbase.newMessage('c0f0424f-cf81-4f54-8287-006327e7bf4d', req.body.sessionId)
 	.setAsTypeUser('user')
