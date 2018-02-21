@@ -86,7 +86,6 @@ switch(action) {
         });
       break; 
 	case 'nothandled':
-	const chatbase = require('@google/chatbase');
 //Envio de información a Chatbase libreria @google/chatbase
 	var msgUser = chatbase.newMessage('c0f0424f-cf81-4f54-8287-006327e7bf4d', req.body.sessionId)
 	.setAsTypeUser('user')
