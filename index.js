@@ -28,6 +28,7 @@ switch(action) {
 	const userMessage = messageSet.newMessage() // Create a new instance of Message
 	  .setAsTypeUser(true) // Mark it as a message coming from the human
 	  .setUserId(req.body.sessionId) // User ID on the chat platform, or custom ID
+	  .setTimestamp(Date.now().toString())
 	  .setIntent(req.body.result.metadata.intentName) // The intent decoded from the user message, if applicable
 	  .setMessage(req.body.result.resolvedQuery); // User message
 
@@ -42,7 +43,9 @@ switch(action) {
 	const botMessage = messageSet.newMessage() // See above
 	  .setAsTypeAgent(true) // This message is the bot response
 	  .setUserId(req.body.sessionId) // Same as above
+	  .setTimestamp(Date.now().toString())
 	  .setMessage(req.body.result.fulfillment.messages.speech); // Bot response message
+		
 
 	// Send all messages to Chatbase
 	return messageSet.sendMessageSet()
