@@ -22,23 +22,23 @@ switch(action) {
     case 'control':
  	  
 //Envio de información a Chatbase libreria @google/chatbase
-	var msgUser = chatbase.newMessage('c0f0424f-cf81-4f54-8287-006327e7bf4d', req.body.sessionId)
-	.setAsTypeAgent()
+	var msg = chatbase.newMessage('c0f0424f-cf81-4f54-8287-006327e7bf4d', req.body.sessionId)
+	.setAsTypeUser()
 	.setPlatform('Dialogflow') 
 	.setMessage(req.body.result.resolvedQuery) 
 	.setIntent(req.body.result.metadata.intentName)  
 	.setVersion('1.0') 
 	.setMessageId(req.body.id) 
-	.send()
+	/*.send()
 	.then(msgUser => console.log(msgUser.getCreateResponse()))
-	.catch(err => console.error(err));
+	.catch(err => console.error(err));*/
 		
-	var msgAgent = chatbase.newMessage('c0f0424f-cf81-4f54-8287-006327e7bf4d', req.body.sessionId)
+	var msgAgent = msgUser.newMessage()
 	.setAsTypeUser()
 	.setIntent(req.body.result.metadata.intentName)
 	.setMessage(req.body.result.fulfillment.speech)
 	.send()
-	.then(msgAgent => console.log(msgAgent.getCreateResponse()))
+	.then(msg => console.log(msg.getCreateResponse()))
 	.catch(err => console.error(err));
 		
 //Envio de información a Google Analytics libreria request
