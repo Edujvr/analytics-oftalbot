@@ -33,9 +33,9 @@ switch(action) {
 	// Track the message from the user
 	const userMessage = messageSet.newMessage() // Create a new instance of Message
 	  .setAsTypeUser() // Mark it as a message coming from the human
-	  .setUserId("facebook-user-XYZ") // User ID on the chat platform, or custom ID
+	  .setUserId(req.body.sessionId) // User ID on the chat platform, or custom ID
 	  .setTimestamp(Date.now().toString()) // Mandatory
-	  .setIntent(intent) // The intent decoded from the user message, if applicable
+	  .setIntent(req.body.result.metadata.intentName) // The intent decoded from the user message, if applicable
 	  .setMessage("Do you know the time, please?"); // User message
 
 	// Was the intent successfully decoded?
@@ -48,9 +48,9 @@ switch(action) {
 	// Track the response message from the bot
 	const botMessage = messageSet.newMessage() // See above
 	  .setAsTypeAgent() // This message is the bot response
-	  .setUserId("facebook-user-XYZ") // Same as above
+	  .setUserId(req.body.sessionId) // Same as above
 	  .setTimestamp(Date.now().toString()) // Mandatory
-	  .setIntent(intent)
+	  .setIntent(req.body.result.metadata.intentName)
 	  .setMessage("It's 12 o'clock!"); // Bot response message
 
 	// Send all messages to Chatbase
