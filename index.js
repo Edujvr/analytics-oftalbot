@@ -20,31 +20,40 @@ app.post("/webhook", (req, res, next) => {
 	
 switch(action) {   
     case 'control':
-	const set = chatbase.newMessageSet()
+		
+	const messageSet = chatbase.newMessageSet()
 	.setApiKey('c0f0424f-cf81-4f54-8287-006327e7bf4d')
-	.setPlatform('Prueba');
+	.setPlatform('Dialogflow');
 
-// Once can add new messages to the set without storing them locally
-set.newMessage()
-	.setAsTypeUser()
-	.setMessage(req.body.result.resolvedQuery)
-	.setUserId('req.body.sessionId')
-	.setVersion('1.0') 
-	.setMessageId(req.body.id)
+	const userMessage = messageSet.newMessage() // Create a new instance of Message
+	  .setAsTypeUser() // Mark it as a message coming from the human
+	  .setUserId(req.body.sessionId) // User ID on the chat platform, or custom ID
+	  .setIntent(req.body.result.metadata.intentName) // The intent decoded from the user message, if applicable
+	  .setMessage(req.body.result.resolvedQuery); // User message
 
-const msg = set.newMessage()
-	.setAsTypeAgent()
-	.setIntent(req.body.result.metadata.intentName)
-	.setMessage(req.body.result.fulfillment.speech)
-	.setMessageId(req.body.id)
+	// Was the intent successfully decoded?
+	if (req.body.result.metadata.intentName.toString() == "Default") {
+	  userMessage.setAsNotHandled(); // Tell Chatbase to mark this user request as "not handled"
+	} else {
+	  userMessage.setAsHandled(); // Mark this request as successfully handled ;)
+	}
 
-set.sendMessageSet()
-	.then(set => {
-		console.log(set.getCreateResponse());
-	})
-	.catch(error => {
-		console.error(error);
-	})	
+	// Track the response message from the bot
+	const botMessage = messageSet.newMessage() // See above
+	  .setAsTypeAgent() // This message is the bot response
+	  .setUserId(req.body.sessionId) // Same as above
+	  .setMessage(req.body.result.fulfillment.messages.speech); // Bot response message
+
+	// Send all messages to Chatbase
+	return messageSet.sendMessageSet()
+	  .then(response => {
+	    var createResponse = response.getCreateResponse();
+	    return createResponse.all_succeeded; // "true" if all messages were correctly formatted and have been successfully forwarded
+	  })
+	  .catch(error => {
+	    console.error(error);
+	    return false;
+	  });
 		
 /*		
  	  
