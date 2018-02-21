@@ -9,6 +9,7 @@ var request = require('request');
 
 app.post("/webhook", (req, res, next) => {  
   const action = req.body.result.action;
+  const chatbase = require('@google/chatbase');
   //Envio de información webhook a Dialogflow		  
 	res.json({
             messages: req.body.result.fulfillment.messages,
@@ -20,7 +21,6 @@ app.post("/webhook", (req, res, next) => {
 	
 switch(action) {   
     case 'control':
-	const chatbase = require('@google/chatbase');
 	const messageSet = chatbase.newMessageSet()
 	.setApiKey("c0f0424f-cf81-4f54-8287-006327e7bf4d")
 	.setPlatform("Dialogflow");
