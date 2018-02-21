@@ -20,6 +20,33 @@ app.post("/webhook", (req, res, next) => {
 	
 switch(action) {   
     case 'control':
+	const set = chatbase.newMessageSet()
+	.setApiKey('c0f0424f-cf81-4f54-8287-006327e7bf4d')
+	.setPlatform('Prueba');
+
+// Once can add new messages to the set without storing them locally
+set.newMessage()
+	.setAsTypeUser()
+	.setMessage(req.body.result.resolvedQuery)
+	.setUserId('req.body.sessionId')
+	.setVersion('1.0') 
+	.setMessageId(req.body.id)
+
+const msg = set.newMessage()
+	.setAsTypeAgent()
+	.setIntent(req.body.result.metadata.intentName)
+	.setMessage(req.body.result.fulfillment.speech)
+	.setMessageId(req.body.id)
+
+set.sendMessageSet()
+	.then(set => {
+		console.log(set.getCreateResponse());
+	})
+	.catch(error => {
+		console.error(error);
+	})	
+		
+/*		
  	  
 //Envio de información a Chatbase libreria @google/chatbase
 	var msg = chatbase.newMessage('c0f0424f-cf81-4f54-8287-006327e7bf4d', req.body.sessionId)
@@ -31,16 +58,16 @@ switch(action) {
 	.setMessageId(req.body.id) 
 	/*.send()
 	.then(msgUser => console.log(msgUser.getCreateResponse()))
-	.catch(err => console.error(err));*/
+	.catch(err => console.error(err));/
 		
-	var msgAgent = msgUser.newMessage()
+	var msgAgent = msg.newMessage()
 	.setAsTypeUser()
 	.setIntent(req.body.result.metadata.intentName)
 	.setMessage(req.body.result.fulfillment.speech)
 	.send()
 	.then(msg => console.log(msg.getCreateResponse()))
 	.catch(err => console.error(err));
-		
+*/		
 //Envio de información a Google Analytics libreria request
 	const url = 'https://www.google-analytics.com/collect?v=1&t=event&tid=UA-109367761-1&cid='+req.body.sessionId+'&dh=www.google-analytics.com&ec=Intento&ea='+req.body.result.metadata.intentName+'&el='+req.body.result.resolvedQuery+'&ev=1&aip=1';
 		request.get(encodeURI(url))
