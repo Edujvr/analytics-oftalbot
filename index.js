@@ -44,7 +44,7 @@ app.post("/webhook", (req, res, next) => {
 	const botMessage = messageSet.newMessage() // See above
 	  .setAsTypeAgent() // This message is the bot response
 	  .setUserId(req.body.sessionId) // Same as above
-	  .setTimestamp((Date.now().toString()) // Mandatory
+	  .setTimestamp(Date.now().toString()) // Mandatory
 	  .setMessage(req.body.result.fulfillment.speech); // Bot response message
 
 	// Send all messages to Chatbase
