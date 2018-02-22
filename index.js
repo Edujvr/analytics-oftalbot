@@ -10,7 +10,6 @@ var request = require('request');
 app.post("/webhook", (req, res, next) => {  
   const action = req.body.result.action;
   const chatbase = require('@google/chatbase');
-  var intent = "User say";
   //Envio de información webhook a Dialogflow		  
 	res.json({
             messages: req.body.result.fulfillment.messages,
@@ -24,7 +23,7 @@ app.post("/webhook", (req, res, next) => {
 	// See: https://github.com/google/chatbase-node
 	var messageSet = chatbase.newMessageSet()
 	  .setApiKey("c0f0424f-cf81-4f54-8287-006327e7bf4d") // Chatbase API key
-	  .setPlatform("prueba3"); // Chat platform name
+	  .setPlatform("prueba4"); // Chat platform name
 
 	// Track the message from the user
 	const userMessage = messageSet.newMessage() // Create a new instance of Message
