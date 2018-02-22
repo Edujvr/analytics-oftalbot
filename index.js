@@ -4,7 +4,6 @@ const express = require('express');
 const app = express();
 app.use(require('body-parser').json());
 app.listen(process.env.PORT || 8080);
-var start = Date.now();
 var request = require('request');
 
 app.post("/webhook", (req, res, next) => {  
@@ -45,7 +44,7 @@ app.post("/webhook", (req, res, next) => {
 	const botMessage = messageSet.newMessage() // See above
 	  .setAsTypeAgent() // This message is the bot response
 	  .setUserId(req.body.sessionId) // Same as above
-	  .setTimestamp((Date.now()+millis).toString) // Mandatory
+	  .setTimestamp((Date.now().toString()) // Mandatory
 	  .setMessage(req.body.result.fulfillment.speech); // Bot response message
 
 	// Send all messages to Chatbase
