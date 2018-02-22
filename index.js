@@ -25,7 +25,7 @@ switch(action) {
 	// See: https://github.com/google/chatbase-node
 	var messageSet = chatbase.newMessageSet()
 	  .setApiKey("c0f0424f-cf81-4f54-8287-006327e7bf4d") // Chatbase API key
-	  .setPlatform("prueba"); // Chat platform name
+	  .setPlatform("prueba2"); // Chat platform name
 
 	// Track the message from the user
 	const userMessage = messageSet.newMessage() // Create a new instance of Message
