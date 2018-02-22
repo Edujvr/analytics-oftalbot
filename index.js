@@ -10,14 +10,7 @@ var request = require('request');
 app.post("/webhook", (req, res, next) => {  
   const action = req.body.result.action;
   const chatbase = require('@google/chatbase');
-  //Envio de información webhook a Dialogflow		  
-	res.json({
-            messages: req.body.result.fulfillment.messages,
-            speech: req.body.result.fulfillment.speech,
-            displayText: req.body.result.fulfillment.speech,
-            contextOut: req.body.result.contexts,
-            source: req.body.result.source
-          });
+ 
 	
 	// Create a Message Set
 	// See: https://github.com/google/chatbase-node
@@ -30,7 +23,7 @@ app.post("/webhook", (req, res, next) => {
 	  .setAsTypeUser() // Mark it as a message coming from the human
 	  .setUserId(req.body.sessionId) // User ID on the chat platform, or custom ID
 	  .setTimestamp(Date.now().toString()) // Mandatory
-	  .setIntent(req.body.result.metadata.intentName) // The intent decoded from the user message, if applicable
+	  .setIntent("User say") // The intent decoded from the user message, if applicable
 	  .setMessage(req.body.result.resolvedQuery); // User message
 
 	// Was the intent successfully decoded?
@@ -66,7 +59,16 @@ app.post("/webhook", (req, res, next) => {
           	if (err) throw err;
 	  	console.log('Successfully logged to GA , Response to Dialogflow');
         });
-
+	
+	
+ //Envio de información webhook a Dialogflow		  
+	res.json({
+            messages: req.body.result.fulfillment.messages,
+            speech: req.body.result.fulfillment.speech,
+            displayText: req.body.result.fulfillment.speech,
+            contextOut: req.body.result.contexts,
+            source: req.body.result.source
+          });
 	
 		
 		/* 
