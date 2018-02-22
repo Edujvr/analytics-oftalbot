@@ -40,7 +40,6 @@ app.post("/webhook", (req, res, next) => {
 	}
 
 	// Track the response message from the bot
-	var millis = Date.now() - start;
 	const botMessage = messageSet.newMessage() // See above
 	  .setAsTypeAgent() // This message is the bot response
 	  .setUserId(req.body.sessionId) // Same as above
