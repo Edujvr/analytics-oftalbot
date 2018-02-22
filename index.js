@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 app.use(require('body-parser').json());
 app.listen(process.env.PORT || 8080);
-
+var start = Date.now();
 var request = require('request');
 
 app.post("/webhook", (req, res, next) => {  
@@ -29,7 +29,7 @@ app.post("/webhook", (req, res, next) => {
 	const userMessage = messageSet.newMessage() // Create a new instance of Message
 	  .setAsTypeUser() // Mark it as a message coming from the human
 	  .setUserId(req.body.sessionId) // User ID on the chat platform, or custom ID
-	  //.setTimestamp(Date.now().toString()) // Mandatory
+	  .setTimestamp(Date.now().toString()) // Mandatory
 	  .setIntent(req.body.result.metadata.intentName) // The intent decoded from the user message, if applicable
 	  .setMessage(req.body.result.resolvedQuery); // User message
 
@@ -41,10 +41,11 @@ app.post("/webhook", (req, res, next) => {
 	}
 
 	// Track the response message from the bot
+	var millis = Date.now() - start;
 	const botMessage = messageSet.newMessage() // See above
 	  .setAsTypeAgent() // This message is the bot response
 	  .setUserId(req.body.sessionId) // Same as above
-	  //.setTimestamp(Date.now().toString()) // Mandatory
+	  .setTimestamp((Date.now()+millis).toString) // Mandatory
 	  .setMessage(req.body.result.fulfillment.speech); // Bot response message
 
 	// Send all messages to Chatbase
