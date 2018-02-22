@@ -21,8 +21,6 @@ app.post("/webhook", (req, res, next) => {
 	
 switch(action) {   
     case 'control':
-		
-	var action = req.body.result.action; // This should be actually decoded from the user message!
 	// Create a Message Set
 	// See: https://github.com/google/chatbase-node
 	var messageSet = chatbase.newMessageSet()
