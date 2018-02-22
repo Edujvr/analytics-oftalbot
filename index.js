@@ -31,7 +31,7 @@ app.post("/webhook", (req, res, next) => {
 	  .setAsTypeUser() // Mark it as a message coming from the human
 	  .setUserId(req.body.sessionId) // User ID on the chat platform, or custom ID
 	  .setTimestamp(Date.now().toString()) // Mandatory
-	  .setIntent(intent) // The intent decoded from the user message, if applicable
+	  .setIntent(req.body.result.metadata.intentName) // The intent decoded from the user message, if applicable
 	  .setMessage(req.body.result.resolvedQuery); // User message
 
 	// Was the intent successfully decoded?
@@ -46,7 +46,6 @@ app.post("/webhook", (req, res, next) => {
 	  .setAsTypeAgent() // This message is the bot response
 	  .setUserId(req.body.sessionId) // Same as above
 	  .setTimestamp(Date.now().toString()) // Mandatory
-	  .setIntent(req.body.result.metadata.intentName)
 	  .setMessage(req.body.result.fulfillment.speech); // Bot response message
 
 	// Send all messages to Chatbase
