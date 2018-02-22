@@ -36,7 +36,7 @@ switch(action) {
 	  .setMessage(req.body.result.resolvedQuery); // User message
 
 	// Was the intent successfully decoded?
-	if (intent == "UNKNOWN") {
+	if (action == "nothandled") {
 	  userMessage.setAsNotHandled(); // Tell Chatbase to mark this user request as "not handled"
 	} else {
 	  userMessage.setAsHandled(); // Mark this request as successfully handled ;)
