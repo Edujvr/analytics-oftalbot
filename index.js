@@ -60,7 +60,7 @@ switch(action) {
 	    console.error(error);
 	    return false;
 	  });		
-/*		
+		
 //Envio de información a Google Analytics libreria request
 	const url = 'https://www.google-analytics.com/collect?v=1&t=event&tid=UA-109367761-1&cid='+req.body.sessionId+'&dh=www.google-analytics.com&ec=Intento&ea='+req.body.result.metadata.intentName+'&el='+req.body.result.resolvedQuery+'&ev=1&aip=1';
 		request.get(encodeURI(url))
@@ -68,7 +68,9 @@ switch(action) {
           	if (err) throw err;
 	  	console.log('Successfully logged to GA , Response to Dialogflow');
         });
-      break; 
+      break;/* 
+	
+	
 	case 'nothandled':
 //Envio de información a Chatbase libreria @google/chatbase
 	var msgUser = chatbase.newMessage('c0f0424f-cf81-4f54-8287-006327e7bf4d', req.body.sessionId)
