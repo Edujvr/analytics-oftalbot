@@ -9,6 +9,8 @@ var request = require('request');
 
 app.post("/webhook", (req, res, next) => {  
   const action = req.body.result.action;
+  const result = req.body.result.fulfillment.speech;
+	return result;
   const chatbase = require('@google/chatbase');
   //Envio de información webhook a Dialogflow		  
 	res.json({
@@ -48,7 +50,7 @@ switch(action) {
 	  .setUserId(req.body.sessionId) // Same as above
 	  .setTimestamp(Date.now().toString()) // Mandatory
 	  .setIntent(req.body.result.metadata.intentName)
-	  .setMessage("prueba"); // Bot response message
+	  .setMessage(req.body.result.fulfillment.speech); // Bot response message
 
 	// Send all messages to Chatbase
 	return messageSet.sendMessageSet()
