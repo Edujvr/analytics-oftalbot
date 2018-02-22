@@ -22,8 +22,7 @@ app.post("/webhook", (req, res, next) => {
 switch(action) {   
     case 'control':
 		
-		var intent = "ASK-CURRENT-TIME"; // This should be actually decoded from the user message!
-
+	var action = req.body.result.action; // This should be actually decoded from the user message!
 	// Create a Message Set
 	// See: https://github.com/google/chatbase-node
 	var messageSet = chatbase.newMessageSet()
@@ -36,7 +35,7 @@ switch(action) {
 	  .setUserId(req.body.sessionId) // User ID on the chat platform, or custom ID
 	  .setTimestamp(Date.now().toString()) // Mandatory
 	  .setIntent(req.body.result.metadata.intentName) // The intent decoded from the user message, if applicable
-	  .setMessage("Do you know the time, please?"); // User message
+	  .setMessage(req.body.result.resolvedQuery); // User message
 
 	// Was the intent successfully decoded?
 	if (intent == "UNKNOWN") {
@@ -51,7 +50,7 @@ switch(action) {
 	  .setUserId(req.body.sessionId) // Same as above
 	  .setTimestamp(Date.now().toString()) // Mandatory
 	  .setIntent(req.body.result.metadata.intentName)
-	  .setMessage("It's 12 o'clock!"); // Bot response message
+	  .setMessage(req.body.result.fulfillment.messages.speech); // Bot response message
 
 	// Send all messages to Chatbase
 	return messageSet.sendMessageSet()
