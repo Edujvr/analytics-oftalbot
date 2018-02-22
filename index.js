@@ -9,8 +9,6 @@ var request = require('request');
 
 app.post("/webhook", (req, res, next) => {  
   const action = req.body.result.action;
-  const result = req.body.result.fulfillment.speech;
-	return result;
   const chatbase = require('@google/chatbase');
   //Envio de información webhook a Dialogflow		  
 	res.json({
