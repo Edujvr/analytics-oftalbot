@@ -19,13 +19,11 @@ app.post("/webhook", (req, res, next) => {
             source: req.body.result.source
           });
 	
-switch(action) {   
-    case 'control':
 	// Create a Message Set
 	// See: https://github.com/google/chatbase-node
 	var messageSet = chatbase.newMessageSet()
 	  .setApiKey("c0f0424f-cf81-4f54-8287-006327e7bf4d") // Chatbase API key
-	  .setPlatform("prueba2"); // Chat platform name
+	  .setPlatform("prueba3"); // Chat platform name
 
 	// Track the message from the user
 	const userMessage = messageSet.newMessage() // Create a new instance of Message
@@ -68,9 +66,10 @@ switch(action) {
           	if (err) throw err;
 	  	console.log('Successfully logged to GA , Response to Dialogflow');
         });
-      break;/* 
+
 	
-	
+		
+		/* 
 	case 'nothandled':
 //Envio de información a Chatbase libreria @google/chatbase
 	var msgUser = chatbase.newMessage('c0f0424f-cf81-4f54-8287-006327e7bf4d', req.body.sessionId)
@@ -100,5 +99,4 @@ switch(action) {
 	  	console.log('Successfully logged to GA , Response to Dialogflow');
         });
       break;*/ 
-  }
 });
