@@ -48,7 +48,7 @@ switch(action) {
 	  .setUserId(req.body.sessionId) // Same as above
 	  .setTimestamp(Date.now().toString()) // Mandatory
 	  .setIntent(req.body.result.metadata.intentName)
-	  .setMessage(req.body.result.fulfillment.messages.speech); // Bot response message
+	  .setMessage("prueba"); // Bot response message
 
 	// Send all messages to Chatbase
 	return messageSet.sendMessageSet()
