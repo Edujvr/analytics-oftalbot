@@ -53,9 +53,8 @@ app.post("/webhook", (req, res, next) => {
 
 	// Send all messages to Chatbase
 	messageSet.sendMessageSet()
-	  .then(response => {
-	    var createResponse = response.getCreateResponse();
-	    console.log(set.getCreateResponse());
+	  .then(messageSet => {
+	    console.log(messageSet.getCreateResponse());
 	  })
 	  .catch(error => {
 	    console.error(error);
