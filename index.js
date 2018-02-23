@@ -25,18 +25,23 @@ app.post("/webhook", (req, res, next) => {
 	  .setPlatform("prueba4"); // Chat platform name
 
 	// Track the message from the user
+	if (action == "nothandled") {
 	messageSet.newMessage() // Create a new instance of Message
 	  .setAsTypeUser() // Mark it as a message coming from the human
 	  .setUserId(req.body.sessionId) // User ID on the chat platform, or custom ID
 	  .setTimestamp(Date.now().toString()) // Mandatory
 	  .setIntent(req.body.result.metadata.intentName) // The intent decoded from the user message, if applicable
-	  .setMessage(req.body.result.resolvedQuery); // User message
-
-	// Was the intent successfully decoded?
-	if (action == "nothandled") {
-	  userMessage.setAsNotHandled(); // Tell Chatbase to mark this user request as "not handled"
+	  .setMessage(req.body.result.resolvedQuery) // User message
+	  .setAsNotHandled(); // Tell Chatbase to mark this user request as "not handled"
 	} else {
-	  userMessage.setAsHandled(); // Mark this request as successfully handled ;)
+	  messageSet.newMessage() // Create a new instance of Message
+	  .setAsTypeUser() // Mark it as a message coming from the human
+	  .setUserId(req.body.sessionId) // User ID on the chat platform, or custom ID
+	  .setTimestamp(Date.now().toString()) // Mandatory
+	  .setIntent(req.body.result.metadata.intentName) // The intent decoded from the user message, if applicable
+	  .setMessage(req.body.result.resolvedQuery) // User message
+	  .setAsNotHandled() // Tell Chatbase to mark this user request as "not handled"
+	  .setAsHandled(); // Mark this request as successfully handled ;)
 	}
 
 	// Track the response message from the bot
