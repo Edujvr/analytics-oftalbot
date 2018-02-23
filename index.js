@@ -52,14 +52,13 @@ app.post("/webhook", (req, res, next) => {
 	  .setMessage(req.body.result.fulfillment.speech); // Bot response message
 
 	// Send all messages to Chatbase
-	return messageSet.sendMessageSet()
+	messageSet.sendMessageSet()
 	  .then(response => {
 	    var createResponse = response.getCreateResponse();
-	    return createResponse.all_succeeded; // "true" if all messages were correctly formatted and have been successfully forwarded
+	    console.log(set.getCreateResponse());
 	  })
 	  .catch(error => {
 	    console.error(error);
-	    return false;
 	  });		
 		
 //Envio de información a Google Analytics libreria request
