@@ -25,7 +25,7 @@ app.post("/webhook", (req, res, next) => {
 	  .setPlatform("prueba4"); // Chat platform name
 
 	// Track the message from the user
-	const userMessage = messageSet.newMessage() // Create a new instance of Message
+	messageSet.newMessage() // Create a new instance of Message
 	  .setAsTypeUser() // Mark it as a message coming from the human
 	  .setUserId(req.body.sessionId) // User ID on the chat platform, or custom ID
 	  .setTimestamp(Date.now().toString()) // Mandatory
