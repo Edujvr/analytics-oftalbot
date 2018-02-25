@@ -76,7 +76,7 @@ app.post("/webhook", (req, res, next) => {
 	  })
 	  .catch(error => {
 	    console.error(error);
-	
+	});
 		
 //Envio de información a Google Analytics libreria request
 	const url = 'https://www.google-analytics.com/collect?v=1&t=event&tid=UA-109367761-1&cid='+req.body.sessionId+'&dh=www.google-analytics.com&ec=Intento&ea='+req.body.result.metadata.intentName+'&el='+req.body.result.resolvedQuery+'&ev=1&aip=1';
