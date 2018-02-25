@@ -9,6 +9,7 @@ var request = require('request');
 app.post("/webhook", (req, res, next) => {  
   const action = req.body.result.action;
   const chatbase = require('@google/chatbase');
+  const chatbase2= requiere('@google/chatbase');
   //Envio de información webhook a Dialogflow		  
 	res.json({
             messages: req.body.result.fulfillment.messages,
@@ -44,12 +45,12 @@ app.post("/webhook", (req, res, next) => {
 	  .setAsHandled(); // Mark this request as successfully handled ;)
 	}
 
-	// Track the response message from the bot
+/*	// Track the response message from the bot
 	const botMessage = messageSet.newMessage() // See above
 	  .setAsTypeAgent() // This message is the bot response
 	  .setUserId(req.body.sessionId) // Same as above
 	  .setTimestamp(Date.now().toString()) // Mandatory
-	  .setMessage(req.body.result.fulfillment.speech); // Bot response message
+	  .setMessage(req.body.result.fulfillment.speech); // Bot response message  */
 
 	// Send all messages to Chatbase
 	messageSet.sendMessageSet()
@@ -58,7 +59,24 @@ app.post("/webhook", (req, res, next) => {
 	  })
 	  .catch(error => {
 	    console.error(error);
-	  });		
+	  });	
+	
+	
+	var messageSet2 = chatbase.newMessageSet()
+	  .setApiKey("c0f0424f-cf81-4f54-8287-006327e7bf4d") // Chatbase API key
+	  .setPlatform("prueba4"); // Chat platform name
+	const botMessage = messageSet2.newMessage() // See above
+	  .setAsTypeAgent() // This message is the bot response
+	  .setUserId(req.body.sessionId) // Same as above
+	  .setTimestamp(Date.now().toString()) // Mandatory
+	  .setMessage(req.body.result.fulfillment.speech); // Bot response message  */
+	messageSet2.sendMessageSet()
+	  .then(messageSet => {
+	    console.log(messageSet2.getCreateResponse());
+	  })
+	  .catch(error => {
+	    console.error(error);
+	
 		
 //Envio de información a Google Analytics libreria request
 	const url = 'https://www.google-analytics.com/collect?v=1&t=event&tid=UA-109367761-1&cid='+req.body.sessionId+'&dh=www.google-analytics.com&ec=Intento&ea='+req.body.result.metadata.intentName+'&el='+req.body.result.resolvedQuery+'&ev=1&aip=1';
