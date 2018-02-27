@@ -6,10 +6,12 @@ app.use(require('body-parser').json());
 app.listen(process.env.PORT || 8080);
 var request = require('request');
 
+//Creación del metodo que escucha las llamadas POST y obtiene los parametros
 app.post("/webhook", (req, res, next) => {  
   const action = req.body.result.action;
   const chatbase = require('@google/chatbase');
   const chatbase2= require('@google/chatbase');
+	
   //Envio de información webhook a Dialogflow		  
 	res.json({
             messages: req.body.result.fulfillment.messages,
@@ -19,40 +21,31 @@ app.post("/webhook", (req, res, next) => {
             source: req.body.result.source
           });
 	
-	// Create a Message Set
-	// See: https://github.com/google/chatbase-node
+	// Creación mensaje Set de Usuario
 	var messageSet = chatbase.newMessageSet()
 	  .setApiKey("c0f0424f-cf81-4f54-8287-006327e7bf4d") // Chatbase API key
-	  .setPlatform("prueba4"); // Chat platform name
+	  .setPlatform("prueba4"); // Nombre de la Plataforma del Chat
 
-	// Track the message from the user
+	// Mensaje del Usuario
 	if (action == "nothandled") {
-	messageSet.newMessage() // Create a new instance of Message
-	  .setAsTypeUser() // Mark it as a message coming from the human
-	  .setUserId(req.body.sessionId) // User ID on the chat platform, or custom ID
-	  .setTimestamp(Date.now().toString()) // Mandatory
-	  .setIntent(req.body.result.metadata.intentName) // The intent decoded from the user message, if applicable
-	  .setMessage(req.body.result.resolvedQuery) // User message
-	  .setAsNotHandled(); // Tell Chatbase to mark this user request as "not handled"
+	messageSet.newMessage() // Crea una nueva instancia de Mensaje
+	  .setAsTypeUser() // Marca como mensaje que viene del humano
+	  .setUserId(req.body.sessionId) // ID de usuario en la plataforma de chat 
+	  .setTimestamp(Date.now().toString()) // Tiempo obtenido del sistema
+	  .setIntent(req.body.result.metadata.intentName) // La intención decodificada a partir del mensaje del usuario
+	  .setMessage(req.body.result.resolvedQuery) // Mensaje de Usuario
+	  .setAsNotHandled(); // Indica a Chatbase que marque esta solicitud de usuario como "no gestionada"(not handled)
 	} else {
-	  messageSet.newMessage() // Create a new instance of Message
-	  .setAsTypeUser() // Mark it as a message coming from the human
-	  .setUserId(req.body.sessionId) // User ID on the chat platform, or custom ID
-	  .setTimestamp(Date.now().toString()) // Mandatory
-	  .setIntent(req.body.result.metadata.intentName) // The intent decoded from the user message, if applicable
-	  .setMessage(req.body.result.resolvedQuery) // User message
-	  .setAsNotHandled() // Tell Chatbase to mark this user request as "not handled"
-	  .setAsHandled(); // Mark this request as successfully handled ;)
+	  messageSet.newMessage() // Crea una nueva instancia de Mensaje
+	  .setAsTypeUser() // Marca como mensaje que viene del humano
+	  .setUserId(req.body.sessionId) // ID de usuario en la plataforma de chat 
+	  .setTimestamp(Date.now().toString()) // Tiempo obtenido del sistema
+	  .setIntent("User say") // La intención decodificada a partir del mensaje del usuario
+	  .setMessage(req.body.result.resolvedQuery) // Mensaje de Usuario
+	  .setAsHandled(); // Marque esta solicitud como exitosamente manejada(handled)
 	}
 
-/*	// Track the response message from the bot
-	const botMessage = messageSet.newMessage() // See above
-	  .setAsTypeAgent() // This message is the bot response
-	  .setUserId(req.body.sessionId) // Same as above
-	  .setTimestamp(Date.now().toString()) // Mandatory
-	  .setMessage(req.body.result.fulfillment.speech); // Bot response message  */
-
-	// Send all messages to Chatbase
+	// Envio de mensaje a Chatbase
 	messageSet.sendMessageSet()
 	  .then(messageSet => {
 	    console.log(messageSet.getCreateResponse());
@@ -61,15 +54,20 @@ app.post("/webhook", (req, res, next) => {
 	    console.error(error);
 	  });	
 	
-	
+	// Creación mensaje Set del Bot
 	var messageSet2 = chatbase.newMessageSet()
 	  .setApiKey("c0f0424f-cf81-4f54-8287-006327e7bf4d") // Chatbase API key
-	  .setPlatform("prueba4"); // Chat platform name
-	const botMessage = messageSet2.newMessage() // See above
-	  .setAsTypeAgent() // This message is the bot response
-	  .setUserId(req.body.sessionId) // Same as above
-	  .setTimestamp(Date.now().toString()) // Mandatory
-	  .setMessage(req.body.result.fulfillment.speech); // Bot response message  */
+	  .setPlatform("prueba4"); // Nombre de la Plataforma del Chat
+	
+	// Mensaje del Bot
+	const botMessage = messageSet2.newMessage() // Crea una nueva instancia de Mensaje
+	  .setAsTypeAgent() // Este mensaje es la respuesta bot
+	  .setUserId(req.body.sessionId) // ID de usuario la misma que arriba
+	  .setTimestamp(Date.now().toString()) // Tiempo obtenido del sistema
+	  .setIntent(req.body.result.metadata.intentName)
+	  .setMessage(req.body.result.fulfillment.speech); // Mensaje de respuesta del Bot
+	
+	// Envio de mensaje a Chatbase
 	messageSet2.sendMessageSet()
 	  .then(messageSet => {
 	    console.log(messageSet2.getCreateResponse());
