@@ -7,7 +7,7 @@ app.listen(process.env.PORT || 8080);
 var request = require('request');
 
 //Creación del metodo que escucha las llamadas POST y obtiene los parametros
-app.post("/webhook", (req, res, next) => {  
+exports.webhook = (req, res) =>{  
   const action = req.body.result.action;
   const chatbase = require('@google/chatbase');
   const chatbase2= require('@google/chatbase');
@@ -23,8 +23,9 @@ app.post("/webhook", (req, res, next) => {
 	
 	// Creación mensaje Set de Usuario
 	var messageSet = chatbase.newMessageSet()
-	  .setApiKey("c0f0424f-cf81-4f54-8287-006327e7bf4d") // Chatbase API key
-	  .setPlatform("prueba4"); // Nombre de la Plataforma del Chat
+	  .setApiKey("da9339a8-3149-4788-b348-8ddf5a3046a7") // Chatbase API key
+	  .setPlatform("Dialogflow") // Nombre de la Plataforma del Chat
+	  .setVersion('1.0'); // La versión que el bot desplegado es
 
 	// Mensaje del Usuario
 	if (action == "nothandled") {
@@ -56,8 +57,9 @@ app.post("/webhook", (req, res, next) => {
 	
 	// Creación mensaje Set del Bot
 	var messageSet2 = chatbase.newMessageSet()
-	  .setApiKey("c0f0424f-cf81-4f54-8287-006327e7bf4d") // Chatbase API key
-	  .setPlatform("prueba4"); // Nombre de la Plataforma del Chat
+	  .setApiKey("da9339a8-3149-4788-b348-8ddf5a3046a7") // Chatbase API key
+	  .setPlatform("Dialogflow") // Nombre de la Plataforma del Chat
+	  .setVersion('1.0'); // La versión que el bot desplegado es
 	
 	// Mensaje del Bot
 	const botMessage = messageSet2.newMessage() // Crea una nueva instancia de Mensaje
@@ -76,10 +78,10 @@ app.post("/webhook", (req, res, next) => {
 	});
 		
 //Envio de información a Google Analytics libreria request
-	const url = 'https://www.google-analytics.com/collect?v=1&t=event&tid=UA-109367761-1&cid='+req.body.sessionId+'&dh=www.google-analytics.com&ec=Intento&ea='+req.body.result.metadata.intentName+'&el='+req.body.result.resolvedQuery+'&ev=1&aip=1';
+	const url = 'https://www.google-analytics.com/collect?v=1&t=event&tid=UA-111480355-1&cid='+req.body.sessionId+'&dh=www.google-analytics.com&ec=Intento&ea='+req.body.result.metadata.intentName+'&el='+req.body.result.resolvedQuery+'&ev=1&aip=1';
 		request.get(encodeURI(url))
        		.on('error', function(err){
           	if (err) throw err;
 	  	console.log('Successfully logged to GA , Response to Dialogflow');
         });
-});
+};
