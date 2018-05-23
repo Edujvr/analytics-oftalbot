@@ -5,24 +5,10 @@ const app = express();
 app.use(require('body-parser').json());
 app.listen(process.env.PORT || 8080);
 var request = require('request');
-var mongoose = require('mongoose');
-
-// Le indicamos a Mongoose que haremos la conexión con Promesas
-mongoose.Promise = global.Promise;
-
 
 //Creación del metodo que escucha las llamadas POST y obtiene los parametros
 exports.webhook = (req, res) =>{  
 	
-	 
-// Usamos el método connect para conectarnos a nuestra base de datos
-mongoose.connect('mongodb://localhost:27017/escenarios', {useMongoClient: true})
-        .then(() => {
-                // Cuando se realiza la conexión, lanzamos este mensaje por consola
-            console.log('La conexión a MongoDB se ha realizado correctamente!!');
-        })
-        .catch(err => console.log(err));
-        // Si no se conecta correctamente escupimos el error
   const action = req.body.result.action;
   const chatbase = require('@google/chatbase');
   const chatbase2= require('@google/chatbase');
