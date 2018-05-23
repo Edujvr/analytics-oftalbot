@@ -37,7 +37,7 @@ exports.webhook = (req, res) =>{
 	
 	// Creación mensaje Set de Usuario
 	var messageSet = chatbase.newMessageSet()
-	  .setApiKey("da9339a8-3149-4788-b348-8ddf5a3046a7") // Chatbase API key
+	  .setApiKey("cb4e2bebe12b47a393a13580be7ac2f1") // Chatbase API key
 	  .setPlatform("Dialogflow") // Nombre de la Plataforma del Chat
 	  .setVersion('1.0'); // La versión que el bot desplegado es
 
