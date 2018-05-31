@@ -9,9 +9,7 @@ const taskController = require("./controllers/TaskController");
 
 // db instance connection
 require("./config/db");
-app
-  .route("/webhook")
-  .post(taskController.createNewTask);
+app.route("/webhook").post(taskController.createNewTask);
 
 //Creación del metodo que escucha las llamadas POST y obtiene los parametros
 app.post("/webhook", (req, res) =>{  
