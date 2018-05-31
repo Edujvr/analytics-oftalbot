@@ -24,7 +24,7 @@ exports.webhook = (req, res) =>{
 	
 	// Creación mensaje Set de Usuario
 	var messageSet = chatbase.newMessageSet()
-	  .setApiKey("cb4e2bebe12b47a393a13580be7ac2f1") // Chatbase API key
+	  .setApiKey("c0f0424f-cf81-4f54-8287-006327e7bf4d") // Chatbase API key
 	  .setPlatform("Dialogflow") // Nombre de la Plataforma del Chat
 	  .setVersion('1.0'); // La versión que el bot desplegado es
 
@@ -58,7 +58,7 @@ exports.webhook = (req, res) =>{
 	
 	// Creación mensaje Set del Bot
 	var messageSet2 = chatbase.newMessageSet()
-	  .setApiKey("da9339a8-3149-4788-b348-8ddf5a3046a7") // Chatbase API key
+	  .setApiKey("c0f0424f-cf81-4f54-8287-006327e7bf4d") // Chatbase API key
 	  .setPlatform("Dialogflow") // Nombre de la Plataforma del Chat
 	  .setVersion('1.0'); // La versión que el bot desplegado es
 	
@@ -79,7 +79,7 @@ exports.webhook = (req, res) =>{
 	});
 		
 //Envio de información a Google Analytics libreria request
-	const url = 'https://www.google-analytics.com/collect?v=1&t=event&tid=UA-111480355-1&cid='+req.body.sessionId+'&dh=www.google-analytics.com&ec=Intento&ea='+req.body.result.metadata.intentName+'&el='+req.body.result.resolvedQuery+'&ev=1&aip=1';
+	const url = 'https://www.google-analytics.com/collect?v=1&t=event&tid=UA-109367761-1&cid='+req.body.sessionId+'&dh=www.google-analytics.com&ec=Intento&ea='+req.body.result.metadata.intentName+'&el='+req.body.result.resolvedQuery+'&ev=1&aip=1';
 		request.get(encodeURI(url))
        		.on('error', function(err){
           	if (err) throw err;
