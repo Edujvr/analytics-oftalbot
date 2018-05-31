@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const TaskSchema = new Schema({
   sessionId: {
-    type: Int64,
+    type: int,
     required: true
   },
   result: {
