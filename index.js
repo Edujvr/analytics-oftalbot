@@ -15,7 +15,7 @@ require("./config/db");
 //Creación del metodo que escucha las llamadas POST y obtiene los parametros
 app.post("/webhook", (req, res) =>{  
 	
-let newTask = new Task(req.body.result.resolvedQuery);
+let newTask = new Task(req.body);
   newTask.save((err, task) => {
     if (err) {
       res.status(500).send(err);
