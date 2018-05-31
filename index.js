@@ -7,7 +7,7 @@ app.listen(process.env.PORT || 8080);
 var request = require('request');
 
 //Creación del metodo que escucha las llamadas POST y obtiene los parametros
-exports.webhook = (req, res) =>{  
+app.post("/webhook", (req, res) =>{  
 	
   const action = req.body.result.action;
   const chatbase = require('@google/chatbase');
@@ -85,4 +85,4 @@ exports.webhook = (req, res) =>{
           	if (err) throw err;
 	  	console.log('Successfully logged to GA , Response to Dialogflow');
         });
-};
+});
