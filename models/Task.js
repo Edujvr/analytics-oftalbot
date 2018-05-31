@@ -6,6 +6,12 @@ const TaskSchema = new Schema({
     type: String,
     required: true
   },
+  result: {
+    resolvedQuery:{
+      type: String,
+      required:true
+    }
+  },
   createdOn: {
     type: Date,
     default: Date.now
