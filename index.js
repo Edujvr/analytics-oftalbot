@@ -7,14 +7,22 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.listen(process.env.PORT || 8080);
 var request = require('request');
-const taskController = require("./controllers/TaskController");
-taskController.createNewTask;
+const Task = require("../models/Task");
 
 // db instance connection
 require("./config/db");
 
 //Creación del metodo que escucha las llamadas POST y obtiene los parametros
 app.post("/webhook", (req, res) =>{  
+	
+let newTask = new Task(req.body.result.resolvedQuery);
+  newTask.save((err, task) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    res.status(201).json(task);
+  });
+
 	
   const action = req.body.result.action;
   const chatbase = require('@google/chatbase');
