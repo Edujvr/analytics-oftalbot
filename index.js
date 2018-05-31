@@ -7,7 +7,7 @@ app.listen(process.env.PORT || 8080);
 var request = require('request');
 
 //Creación del metodo que escucha las llamadas POST y obtiene los parametros
-exports./webhook = (req, res) =>{  
+exports.webhook = (req, res) =>{  
 	
   const action = req.body.result.action;
   const chatbase = require('@google/chatbase');
