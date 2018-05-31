@@ -6,18 +6,6 @@ const TaskSchema = new Schema({
     type: Number,
     required: true
   },
-  result: {
-    resolvedQuery:{
-      type: String,
-      required:true,
-    },
-      metadata:{
-        intentName:{
-        type: String,
-        required:true
-        }
-      }
-  },
   createdOn: {
     type: Date,
     default: Date.now
