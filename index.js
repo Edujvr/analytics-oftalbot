@@ -5,6 +5,10 @@ const app = express();
 app.use(require('body-parser').json());
 app.listen(process.env.PORT || 8080);
 var request = require('request');
+const taskController = require("./controllers/TaskController");
+
+// db instance connection
+require("./config/db");
 
 //Creación del metodo que escucha las llamadas POST y obtiene los parametros
 app.post("/webhook", (req, res) =>{  
@@ -12,7 +16,7 @@ app.post("/webhook", (req, res) =>{
   const action = req.body.result.action;
   const chatbase = require('@google/chatbase');
   const chatbase2= require('@google/chatbase');
-	
+  taskController.createNewTask	
   //Envio de información webhook a Dialogflow		  
 	res.json({
             messages: req.body.result.fulfillment.messages,
