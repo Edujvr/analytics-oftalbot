@@ -10,7 +10,7 @@ exports.listAllTasks = (req, res) => {
 };
 
 exports.createNewTask = (req, res) => {
-  let newTask = new Task(req.body);
+  let newTask = new Task(req.body.result.resolvedQuery);
   newTask.save((err, task) => {
     if (err) {
       res.status(500).send(err);
