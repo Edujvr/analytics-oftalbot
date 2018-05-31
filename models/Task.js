@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const TaskSchema = new Schema({
-  userSay: {
+  resolvedQuery: {
     type: String,
     required: true
   },
