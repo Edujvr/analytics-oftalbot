@@ -9,14 +9,16 @@ const taskController = require("./controllers/TaskController");
 
 // db instance connection
 require("./config/db");
+app
+  .route("/webhook")
+  .post(taskController.createNewTask);
 
 //Creación del metodo que escucha las llamadas POST y obtiene los parametros
 app.post("/webhook", (req, res) =>{  
 	
   const action = req.body.result.action;
   const chatbase = require('@google/chatbase');
-  const chatbase2= require('@google/chatbase');
-  taskController.createNewTask	
+  const chatbase2= require('@google/chatbase');	
   //Envio de información webhook a Dialogflow		  
 	res.json({
             messages: req.body.result.fulfillment.messages,
