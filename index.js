@@ -7,7 +7,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.listen(process.env.PORT || 8080);
 var request = require('request');
-const Task = require("../models/Task");
+const Task = require("/models/Task");
 
 // db instance connection
 require("./config/db");
