@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 app.listen(process.env.PORT || 8080);
 var request = require('request');
 const taskController = require("./controllers/TaskController");
-taskController.createNewTask
+taskController.createNewTask;
 
 // db instance connection
 require("./config/db");
