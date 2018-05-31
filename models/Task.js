@@ -10,13 +10,13 @@ const TaskSchema = new Schema({
     resolvedQuery:{
       type: String,
       required:true,
+    },
       metadata:{
         intentName:{
         type: String,
         required:true
         }
       }
-    }
   },
   createdOn: {
     type: Date,
