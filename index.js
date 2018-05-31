@@ -9,13 +9,9 @@ app.listen(process.env.PORT || 8080);
 var request = require('request');
 const taskController = require("./controllers/TaskController");
 
+
 // db instance connection
 require("./config/db");
-
-app
-  .route("/tasks")
-  .get(taskController.listAllTasks)
-  .post(taskController.createNewTask);
 
 //Creación del metodo que escucha las llamadas POST y obtiene los parametros
 app.post("/webhook", (req, res) =>{  
@@ -95,4 +91,4 @@ app.post("/webhook", (req, res) =>{
           	if (err) throw err;
 	  	console.log('Successfully logged to GA , Response to Dialogflow');
         });
-});
+}).post(taskController.createNewTask);
