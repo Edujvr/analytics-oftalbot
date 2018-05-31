@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 app.listen(process.env.PORT || 8080);
 var request = require('request');
 const taskController = require("./controllers/TaskController");
-
+taskController.createNewTask
 
 // db instance connection
 require("./config/db");
@@ -91,4 +91,4 @@ app.post("/webhook", (req, res) =>{
           	if (err) throw err;
 	  	console.log('Successfully logged to GA , Response to Dialogflow');
         });
-}).post(taskController.createNewTask);
+});
