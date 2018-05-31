@@ -20,6 +20,10 @@ const TaskSchema = new Schema({
         }
     }
   },
+  sessionId:{
+        type: String,
+        required:true
+  },
   createdOn: {
     type: Date,
     default: Date.now
