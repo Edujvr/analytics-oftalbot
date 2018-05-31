@@ -7,12 +7,18 @@ const TaskSchema = new Schema({
       type: String,
       required:true,
     },
-      metadata:{
-        intentName:{
+    metadata:{
+      intentName:{
         type: String,
         required:true
         }
-      }
+      },
+    fulfillment:{
+      speech:{
+        type: String,
+        required:true
+        }
+    }
   },
   createdOn: {
     type: Date,
