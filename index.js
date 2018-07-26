@@ -15,18 +15,29 @@ require("./config/db");
 //Creación del metodo que escucha las llamadas POST y obtiene los parametros
 app.post("/webhook", (req, res) =>{  
 	
-let newTask = new Task(req.body);
+/*let newTask = new Task(req.body);
   newTask.save((err, task) => {
     if (err) {
       res.status(500).send(err);
     }
     res.status(201).json(task);
-  });
-
-	
+  });*/
+  
+  const Task = require("../models/Task");
   const action = req.body.result.action;
   const chatbase = require('@google/chatbase');
   const chatbase2= require('@google/chatbase');	
+	
+	if(action="query"){
+		console.log('Ingreso al metodo de consulta');
+		Task.findById(req.body.result.parameters.UsuarioRed, (err, task) => {
+		    if (err) {
+		      res.status(500).send(err);
+		    }
+		    res.status(200).json(task);
+		  });
+	}
+	
   //Envio de información webhook a Dialogflow		  
 	res.json({
             messages: req.body.result.fulfillment.messages,
@@ -35,7 +46,7 @@ let newTask = new Task(req.body);
             contextOut: req.body.result.contexts,
             source: req.body.result.source
           });
-	
+/*	
 	// Creación mensaje Set de Usuario
 	var messageSet = chatbase.newMessageSet()
 	  .setApiKey("c0f0424f-cf81-4f54-8287-006327e7bf4d") // Chatbase API key
@@ -98,5 +109,5 @@ let newTask = new Task(req.body);
        		.on('error', function(err){
           	if (err) throw err;
 	  	console.log('Successfully logged to GA , Response to Dialogflow');
-        });
+        });*/
 });
