@@ -7,7 +7,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.listen(process.env.PORT || 8080);
 var request = require('request');
-const Task = require("./models/Task");
+const Colaboradores = require("./models/Colaboradores");
 
 // db instance connection
 require("./config/db");
@@ -23,14 +23,14 @@ app.post("/webhook", (req, res) =>{
     res.status(201).json(task);
   });*/
   
-  const Task = require("../models/Task");
+  const Colaboradores = require("../models/Colaboradores");
   const action = req.body.result.action;
   const chatbase = require('@google/chatbase');
   const chatbase2= require('@google/chatbase');	
 	
 	if(action="query"){
 		console.log('Ingreso al metodo de consulta');
-		Task.findById(req.body.result.parameters.UsuarioRed, (err, task) => {
+		Colaboradores.findById(req.body.result.parameters.UsuarioRed, (err, task) => {
 		    if (err) {
 		      res.status(500).send(err);
 		    }
