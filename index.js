@@ -29,9 +29,10 @@ app.post("/webhook", (req, res) =>{
   const chatbase2= require('@google/chatbase');	
   console.log(action);	
 	if(action=='query'){
+		var numero='5b5a855da0b3371a1cf2d062';
 		console.log('Ingreso al metodo de consulta');
 		console.log(req.body.result.parameters.UsuariosRed);
-		var colaborador=Colaboradores.findById(5b5a855da0b3371a1cf2d062, (err, colaboradores) => {
+		var colaborador=Colaboradores.findById('5b5a855da0b3371a1cf2d062', (err, colaboradores) => {
 		    if (err) {
 		      res.status(500).send(err);
 		    }
