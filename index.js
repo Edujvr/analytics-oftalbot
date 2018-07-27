@@ -23,7 +23,7 @@ app.post("/webhook", (req, res) =>{
     res.status(201).json(task);
   });*/
   
-  const Colaboradores = require("../models/Colaboradores");
+  const Colaboradores = require("./models/Colaboradores");
   const action = req.body.result.action;
   const chatbase = require('@google/chatbase');
   const chatbase2= require('@google/chatbase');	
