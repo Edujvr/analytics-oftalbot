@@ -30,11 +30,12 @@ app.post("/webhook", (req, res) =>{
   console.log(action);	
 	if(action=='query'){
 		console.log('Ingreso al metodo de consulta');
-		var colaborador=Colaboradores.findById(req.body.result.parameters.UsuarioRed, (err, task) => {
+		console.log(req.body.result.parameters.UsuarioRed);
+		var colaborador=Colaboradores.findById(req.body.result.parameters.UsuarioRed, (err, colaboradores) => {
 		    if (err) {
 		      res.status(500).send(err);
 		    }
-		    res.status(200).json(task);
+		    res.status(200).json(colaboradores);
 		  });
 		console.log(colaborador);
 	}
