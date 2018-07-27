@@ -30,9 +30,11 @@ app.post("/webhook", (req, res) =>{
   console.log(action);	
 	if(action=='query'){
 		var numero='5b5a855da0b3371a1cf2d062';
+		var colaborador = new Object();
+		colaborador.userid = req.body.result.parameters.UsuariosRed;
 		console.log('Ingreso al metodo de consulta');
 		console.log(req.body.result.parameters.UsuariosRed);
-		var colaborador=Colaboradores.find(req.body.result.parameters.UsuariosRed, (err, colaboradores) => {
+		var colaborador=Colaboradores.find(colaborador, (err, colaboradores) => {
 		    if (err) {
 		      res.status(500).send(err);
 		    }
