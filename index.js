@@ -32,7 +32,7 @@ app.post("/webhook", (req, res) =>{
 		var numero='5b5a855da0b3371a1cf2d062';
 		console.log('Ingreso al metodo de consulta');
 		console.log(req.body.result.parameters.UsuariosRed);
-		var colaborador=Colaboradores.find(req.body.result.parameters.UsuariosRed, (err, colaboradores) => {
+		var colaborador=Colaboradores.find(userid:req.body.result.parameters.UsuariosRed, (err, colaboradores) => {
 		    if (err) {
 		      res.status(500).send(err);
 		    }
