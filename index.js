@@ -28,7 +28,7 @@ app.post("/webhook", (req, res) =>{
   const chatbase = require('@google/chatbase');
   const chatbase2= require('@google/chatbase');	
   console.log(action);	
-/*	if(action="query"){
+	if(action=='query'){
 		console.log('Ingreso al metodo de consulta');
 		Colaboradores.findById(req.body.result.parameters.UsuarioRed, (err, task) => {
 		    if (err) {
@@ -37,7 +37,7 @@ app.post("/webhook", (req, res) =>{
 		    res.status(200).json(task);
 		  });
 	}
-*/	
+	
   //Envio de información webhook a Dialogflow		  
 	res.json({
             messages: req.body.result.fulfillment.messages,
