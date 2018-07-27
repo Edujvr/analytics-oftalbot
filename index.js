@@ -29,12 +29,13 @@ app.post("/webhook", (req, res) =>{
   const chatbase2= require('@google/chatbase');	
   console.log(action);	
 	if(action=='query'){
+		var query  = Colaboradores.where({ consultor: req.body.result.parameters.UsuariosRed });
 		var numero='5b5a855da0b3371a1cf2d062';
 		var colaborador = new Object();
 		colaborador.userid = req.body.result.parameters.UsuariosRed;
 		console.log('Ingreso al metodo de consulta');
 		console.log(req.body.result.parameters.UsuariosRed);
-		var cola =Colaboradores.find(colaborador, (err, colaboradores) => {
+		var cola = query.findOne(function (err, Colaboradores) => {
 		    if (err) {
 		      res.status(500).send(err);
 		    }
