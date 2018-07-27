@@ -30,12 +30,13 @@ app.post("/webhook", (req, res) =>{
   console.log(action);	
 	if(action=='query'){
 		console.log('Ingreso al metodo de consulta');
-		Colaboradores.findById(req.body.result.parameters.UsuarioRed, (err, task) => {
+		var colaborador=Colaboradores.findById(req.body.result.parameters.UsuarioRed, (err, task) => {
 		    if (err) {
 		      res.status(500).send(err);
 		    }
 		    res.status(200).json(task);
 		  });
+		console.log(colaborador);
 	}
 	
   //Envio de información webhook a Dialogflow		  
