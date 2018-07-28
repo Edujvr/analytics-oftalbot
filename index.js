@@ -41,7 +41,7 @@ app.post("/webhook", (req, res) =>{
 			var respuesta = "Tu consultor es :" + colaboradores.consultor 
 			console.log(respuesta)
 			res.json({
-			    messages: respuesta,
+			    messages: req.body.result.fulfillment.messages,
 			    speech: req.body.result.fulfillment.speech,
 			    displayText: req.body.result.fulfillment.speech,
 			    contextOut: req.body.result.contexts,
