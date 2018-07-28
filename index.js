@@ -38,7 +38,7 @@ app.post("/webhook", (req, res) =>{
 		    if (err) {
 		      res.status(500).send(err);
 		    }
-			var respuesta = "Tu consultor es :" + colaboradores.consultor 
+			var respuesta = "Tu consultor es " + colaboradores.consultor 
 			console.log(respuesta)
 			sendResponse(respuesta);
 		  });
@@ -65,7 +65,7 @@ function sendResponse (responseToUser) {
       response.json(responseJson); // Send response to Dialogflow
     }
   }
-}
+
 	
   //Envio de información webhook a Dialogflow		  
 /*	res.json({
