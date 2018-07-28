@@ -34,12 +34,17 @@ app.post("/webhook", (req, res) =>{
 		colaborador.userid = req.body.result.parameters.UsuariosRed;
 		console.log('Ingreso al metodo de consulta');
 		console.log(req.body.result.parameters.UsuariosRed);
-		var cola = query.findOne(function (err, colaboradores) {
+		query.findOne(function (err, colaboradores) {
 		    if (err) {
 		      res.status(500).send(err);
 		    }
-		    res.json(colaboradores.consultor);
-			console.log(colaboradores.consultor)
+			res.json({
+			    messages: req.body.result.fulfillment.messages,
+			    speech: req.body.result.fulfillment.speech,
+			    displayText: "Tu consultor es :" + colaboradores.consultor,
+			    contextOut: req.body.result.contexts,
+			    source: req.body.result.source
+			  });
 		  });
 		console.log("Tu consultor es : " + cola);
 	}
