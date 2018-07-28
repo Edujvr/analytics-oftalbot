@@ -46,7 +46,7 @@ app.post("/webhook", (req, res) =>{
 			    source: req.body.result.source
 			  });
 		  });
-		console.log("Tu consultor es : " + cola);
+		//console.log("Tu consultor es : " + cola);
 	}
 	
   //Envio de información webhook a Dialogflow		  
