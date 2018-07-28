@@ -41,7 +41,7 @@ app.post("/webhook", (req, res) =>{
 		    }
 		    res.status(200).json(Colaboradores);
 		  });
-		console.log(cola.consultor);
+		console.log(cola);
 	}
 	
   //Envio de información webhook a Dialogflow		  
