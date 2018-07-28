@@ -35,7 +35,7 @@ app.post("/webhook", (req, res) =>{
 		colaborador.userid = req.body.result.parameters.UsuariosRed;
 		console.log('Ingreso al metodo de consulta');
 		console.log(req.body.result.parameters.UsuariosRed);
-		var cola = query.findOne(function (err, Colaboradores) => {
+		var cola = query.findOne(function (err, Colaboradores) {
 		    if (err) {
 		      res.status(500).send(err);
 		    }
