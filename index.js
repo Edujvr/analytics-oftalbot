@@ -50,7 +50,7 @@ function sendResponse (responseToUser) {
       let responseJson = {};
       responseJson.speech = responseToUser; // spoken response
       responseJson.displayText = responseToUser; // displayed response
-      response.json(responseJson); // Send response to Dialogflow
+      res.json(responseJson); // Send response to Dialogflow
     } else {
       // If the response to the user includes rich responses or contexts send them to Dialogflow
       let responseJson = {};
@@ -62,7 +62,7 @@ function sendResponse (responseToUser) {
       // Optional: add contexts (https://dialogflow.com/docs/contexts)
       responseJson.contextOut = responseToUser.outputContexts;
       console.log('Response to Dialogflow: ' + JSON.stringify(responseJson));
-      response.json(responseJson); // Send response to Dialogflow
+      res.json(responseJson); // Send response to Dialogflow
     }
   }
 
