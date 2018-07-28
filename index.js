@@ -38,12 +38,12 @@ app.post("/webhook", (req, res) =>{
 		    if (err) {
 		      res.status(500).send(err);
 		    }
-			var respuesta = "Tu consultor es" + colaboradores.consultor 
+			var respuesta = "Tu consultor es :" + colaboradores.consultor 
 			console.log(respuesta)
 			res.json({
 			    messages: respuesta,
 			    speech: req.body.result.fulfillment.speech,
-			    displayText: respuesta,
+			    displayText: req.body.result.fulfillment.speech,
 			    contextOut: req.body.result.contexts,
 			    source: req.body.result.source
 			  });
