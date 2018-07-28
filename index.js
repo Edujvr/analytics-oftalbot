@@ -39,7 +39,7 @@ app.post("/webhook", (req, res) =>{
 		    if (err) {
 		      res.status(500).send(err);
 		    }
-		    res.status(200).json(colaboradores);
+		    res.status(200).json(Colaboradores);
 		  });
 		console.log(cola.consultor);
 	}
