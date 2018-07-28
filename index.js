@@ -40,7 +40,7 @@ app.post("/webhook", (req, res) =>{
 		    }
 			res.json({
 			    messages: "Tu consultor es :" + colaboradores.consultor,
-			    speech: "Tu consultor es :" + colaboradores.consultor,
+			    speech: req.body.result.fulfillment.speech,
 			    displayText: "Tu consultor es :" + colaboradores.consultor,
 			    contextOut: req.body.result.contexts,
 			    source: req.body.result.source
