@@ -50,13 +50,13 @@ app.post("/webhook", (req, res) =>{
 	}
 	
   //Envio de información webhook a Dialogflow		  
-	res.json({
+/*	res.json({
             messages: req.body.result.fulfillment.messages,
             speech: req.body.result.fulfillment.speech,
             displayText: req.body.result.fulfillment.speech,
             contextOut: req.body.result.contexts,
             source: req.body.result.source
-          });
+          });*/
 /*	
 	// Creación mensaje Set de Usuario
 	var messageSet = chatbase.newMessageSet()
