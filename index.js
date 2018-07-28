@@ -39,8 +39,8 @@ app.post("/webhook", (req, res) =>{
 		      res.status(500).send(err);
 		    }
 			res.json({
-			    messages: req.body.result.fulfillment.messages,
-			    speech: req.body.result.fulfillment.speech,
+			    messages: "Tu consultor es :" + colaboradores.consultor,
+			    speech: "Tu consultor es :" + colaboradores.consultor,
 			    displayText: "Tu consultor es :" + colaboradores.consultor,
 			    contextOut: req.body.result.contexts,
 			    source: req.body.result.source
