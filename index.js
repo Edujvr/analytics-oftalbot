@@ -38,7 +38,7 @@ app.post("/webhook", (req, res) =>{
 		    if (err) {
 		      res.status(500).send(err);
 		    }
-		    res.status(200).json(colaboradores.consultor);
+		    res.json(colaboradores.consultor);
 			console.log(colaboradores.consultor)
 		  });
 		console.log("Tu consultor es : " + cola);
