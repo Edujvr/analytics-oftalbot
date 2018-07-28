@@ -29,7 +29,7 @@ app.post("/webhook", (req, res) =>{
   const chatbase2= require('@google/chatbase');	
   console.log(action);	
 	if(action=='query'){
-		var query  = Colaboradores.where({ consultor: req.body.result.parameters.UsuariosRed });
+		var query  = Colaboradores.where({ userid: req.body.result.parameters.UsuariosRed });
 		var numero='5b5a855da0b3371a1cf2d062';
 		var colaborador = new Object();
 		colaborador.userid = req.body.result.parameters.UsuariosRed;
