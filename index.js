@@ -29,7 +29,7 @@ app.post("/webhook", (req, res) =>{
   const chatbase2= require('@google/chatbase');	
   console.log(action);	
 	if(action=='query'){
-		var query  = Colaboradores.where({ userid: req.body.result.parameters.UsuariosRed });
+		var query  = Colaboradores.where({ UsuarioRed: req.body.result.parameters.UsuariosRed });
 		var colaborador = new Object();
 		colaborador.userid = req.body.result.parameters.UsuariosRed;
 		console.log('Ingreso al metodo de consulta');
@@ -38,7 +38,7 @@ app.post("/webhook", (req, res) =>{
 		    if (err) {
 		      res.status(500).send(err);
 		    }
-			var respuesta =" Tu consultor es " + colaboradores.NombreConsultor 
+			var respuesta =colaboradores.Nombre " Tu consultor es " + colaboradores.NombreConsultor 
 			console.log(respuesta)
 			sendResponse(respuesta);
 		  });
