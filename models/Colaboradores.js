@@ -2,11 +2,15 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ColaboradoresSchema = new Schema({
-  userid:{
+  Nombre:{
         type: String,
         required:true
   },
-  consultor: {
+  UsuarioRed: {
+    type: String,
+    required:true
+  },
+  NombreConsultor: {
     type: String,
     required:true
   }
