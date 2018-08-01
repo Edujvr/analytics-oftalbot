@@ -38,7 +38,7 @@ app.post("/webhook", (req, res) =>{
 		    if (err) {
 		      res.status(500).send(err);
 		    }
-			var respuesta = "Tu consultor es " + colaboradores.consultor 
+			var respuesta =colaboradores.Nombre+ " Tu consultor es " + colaboradores.NombreConsultor 
 			console.log(respuesta)
 			sendResponse(respuesta);
 		  });
