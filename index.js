@@ -33,7 +33,7 @@ app.post("/webhook", (req, res) =>{
 		var query  = Colaboradores.where({ UsuarioRed: req.body.result.parameters.UsuariosRed });
 		//const usuarioName= req.body.originalRequest.data.user.user_id;
 
-		console.log(req.body.originalRequest);
+		console.log(req.body.originalRequest.data.user);
 		console.log('Ingreso al metodo de consulta');
 		console.log(req.body.result.parameters.UsuariosRed);
 		query.findOne(function (err, colaboradores) {
