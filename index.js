@@ -31,7 +31,7 @@ app.post("/webhook", (req, res) =>{
   console.log(action);	
 	if(action=='query'){
 		var query  = Colaboradores.where({ UsuarioRed: req.body.result.parameters.UsuariosRed });
-		const usuarioName= req.body.originalRequest.data.user.user_id;
+		//const usuarioName= req.body.originalRequest.data.user.user_id;
 		console.log(req);
 		console.log('Ingreso al metodo de consulta');
 		console.log(req.body.result.parameters.UsuariosRed);
