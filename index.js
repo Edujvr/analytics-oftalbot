@@ -32,13 +32,14 @@ app.post("/webhook", (req, res) =>{
 	if(action=='query'){
 		var query  = Colaboradores.where({ UsuarioRed: req.body.result.parameters.UsuariosRed });
 		const usuarioName= req.body.originalRequest.data.user.user_id;
+		console.log(req);
 		console.log('Ingreso al metodo de consulta');
 		console.log(req.body.result.parameters.UsuariosRed);
 		query.findOne(function (err, colaboradores) {
 		    if (err) {
 		      res.status(500).send(err);
 		    }
-			var respuesta =colaboradores.Nombre +" Tu consultor es " + colaboradores.NombreConsultor +" Tu nombre " +usuarioName
+			var respuesta =colaboradores.Nombre +" Tu consultor es " + colaboradores.NombreConsultor //+" Tu nombre " +usuarioName
 			console.log(respuesta)
 			sendResponse(respuesta);
 		  });
