@@ -27,18 +27,18 @@ app.post("/webhook", (req, res) =>{
   const action = req.body.result.action;
   const chatbase = require('@google/chatbase');
   const chatbase2= require('@google/chatbase');	
+  
   console.log(action);	
 	if(action=='query'){
 		var query  = Colaboradores.where({ UsuarioRed: req.body.result.parameters.UsuariosRed });
-		var colaborador = new Object();
-		colaborador.userid = req.body.result.parameters.UsuariosRed;
+		const usuarioName= req.body.originalRequest.data.user.profile.display_name;
 		console.log('Ingreso al metodo de consulta');
 		console.log(req.body.result.parameters.UsuariosRed);
 		query.findOne(function (err, colaboradores) {
 		    if (err) {
 		      res.status(500).send(err);
 		    }
-			var respuesta =colaboradores.Nombre +" Tu consultor es " + colaboradores.NombreConsultor 
+			var respuesta =colaboradores.Nombre +" Tu consultor es " + colaboradores.NombreConsultor +" Tu nombre " +usuarioName
 			console.log(respuesta)
 			sendResponse(respuesta);
 		  });
