@@ -31,11 +31,6 @@ app.post("/webhook", (req, res) =>{
   console.log(action);	
 	if(action=='query'){
 		var query  = Colaboradores.where({ UsuarioRed: req.body.result.parameters.UsuariosRed });
-		//const usuarioName= req.body.originalRequest.data.user.user_id;
-
-		console.log(req.body.originalRequest.data.sender);
-		console.log('Ingreso al metodo de consulta');
-		console.log(req.body.result.parameters.UsuariosRed);
 		query.findOne(function (err, colaboradores) {
 		    if (err) {
 		      res.status(500).send(err);
@@ -44,27 +39,27 @@ app.post("/webhook", (req, res) =>{
 			console.log(respuesta)
 			sendResponse(respuesta);
 		  });
-		//console.log("Tu consultor es : " + cola);
 	}
+	
 function sendResponse (responseToUser) {
-    // if the response is a string send it as a response to the user
+    // Si la respuesta es una cadena, envíela como respuesta al usuario
     if (typeof responseToUser === 'string') {
       let responseJson = {};
-      responseJson.speech = responseToUser; // spoken response
-      responseJson.displayText = responseToUser; // displayed response
-      res.json(responseJson); // Send response to Dialogflow
+      responseJson.speech = responseToUser; // respuesta hablada
+      responseJson.displayText = responseToUser; // respuesta mostrada
+      res.json(responseJson); // Enviar respuesta a Dialogflow
     } else {
-      // If the response to the user includes rich responses or contexts send them to Dialogflow
+      // Si la respuesta al usuario incluye respuestas ricas o contextos, envíelos a Dialogflow
       let responseJson = {};
-      // If speech or displayText is defined, use it to respond (if one isn't defined use the other's value)
+      // Si speech o displayText está definido, úselo para responder (si uno no está definido use el valor del otro)
       responseJson.speech = responseToUser.speech || responseToUser.displayText;
       responseJson.displayText = responseToUser.displayText || responseToUser.speech;
-      // Optional: add rich messages for integrations (https://dialogflow.com/docs/rich-messages)
+      // Opcional: agregue mensajes enriquecidos para integraciones (https://dialogflow.com/docs/rich-messages)
       responseJson.data = responseToUser.data;
-      // Optional: add contexts (https://dialogflow.com/docs/contexts)
+      // Opcional: agregar contextos (https://dialogflow.com/docs/contexts)
       responseJson.contextOut = responseToUser.outputContexts;
       console.log('Response to Dialogflow: ' + JSON.stringify(responseJson));
-      res.json(responseJson); // Send response to Dialogflow
+      res.json(responseJson); // Enviar respuesta a Dialogflow
     }
   }
 
@@ -87,7 +82,7 @@ function sendResponse (responseToUser) {
 	// Mensaje del Usuario
 	if (action == "nothandled") {
 	messageSet.newMessage() // Crea una nueva instancia de Mensaje
-	  .setAsTypeUser() // Marca como mensaje que viene del humano
+	  .setAsTypeUser() // Marca como mensaje que viene del Usuario
 	  .setUserId(req.body.sessionId) // ID de usuario en la plataforma de chat 
 	  .setTimestamp(Date.now().toString()) // Tiempo obtenido del sistema
 	  .setIntent(req.body.result.metadata.intentName) // La intención decodificada a partir del mensaje del usuario
@@ -95,7 +90,7 @@ function sendResponse (responseToUser) {
 	  .setAsNotHandled(); // Indica a Chatbase que marque esta solicitud de usuario como "no gestionada"(not handled)
 	} else {
 	  messageSet.newMessage() // Crea una nueva instancia de Mensaje
-	  .setAsTypeUser() // Marca como mensaje que viene del humano
+	  .setAsTypeUser() // Marca como mensaje que viene del Usuario
 	  .setUserId(req.body.sessionId) // ID de usuario en la plataforma de chat 
 	  .setTimestamp(Date.now().toString()) // Tiempo obtenido del sistema
 	  .setIntent(req.body.result.metadata.intentName) // La intención decodificada a partir del mensaje del usuario
@@ -120,7 +115,7 @@ function sendResponse (responseToUser) {
 	
 	// Mensaje del Bot
 	const botMessage = messageSet2.newMessage() // Crea una nueva instancia de Mensaje
-	  .setAsTypeAgent() // Este mensaje es la respuesta bot
+	  .setAsTypeAgent() // Marca como mensaje que viene del Bot
 	  .setUserId(req.body.sessionId) // ID de usuario la misma que arriba
 	  .setTimestamp(Date.now().toString()) // Tiempo obtenido del sistema
 	  .setMessage(req.body.result.fulfillment.speech); // Mensaje de respuesta del Bot
