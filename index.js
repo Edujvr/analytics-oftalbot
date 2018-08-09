@@ -22,7 +22,9 @@ app.post("/webhook", (req, res) =>{
     }
     res.status(201).json(task);
   });*/
-  
+  console.log(req.body)
+	
+	
   const Colaboradores = require("./models/Colaboradores");
   const action = req.body.result.action;
   const chatbase = require('@google/chatbase');
@@ -36,7 +38,6 @@ app.post("/webhook", (req, res) =>{
 		      res.status(500).send(err);
 		    }
 			var respuesta =colaboradores.Nombre +" Tu consultor es " + colaboradores.NombreConsultor //+" Tu nombre " +usuarioName
-			console.log(respuesta)
 			sendResponse(respuesta);
 		  });
 	}
@@ -65,13 +66,13 @@ function sendResponse (responseToUser) {
 
 	
   //Envio de información webhook a Dialogflow		  
-/*	res.json({
+	res.json({
             messages: req.body.result.fulfillment.messages,
             speech: req.body.result.fulfillment.speech,
             displayText: req.body.result.fulfillment.speech,
             contextOut: req.body.result.contexts,
             source: req.body.result.source
-          });*/
+          });
 /*	
 	// Creación mensaje Set de Usuario
 	var messageSet = chatbase.newMessageSet()
