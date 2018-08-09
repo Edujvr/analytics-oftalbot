@@ -22,7 +22,7 @@ app.post("/webhook", (req, res) =>{
     }
     res.status(201).json(task);
   });*/
-  console.log(req.body)
+  console.log(req.body.result)
 	
 	
   const Colaboradores = require("./models/Colaboradores");
