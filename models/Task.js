@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const HistorialSchema = new Schema({
+const TaskSchema = new Schema({
   result:{
     resolvedQuery:{
       type: String,
