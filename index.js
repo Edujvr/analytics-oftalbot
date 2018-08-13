@@ -29,7 +29,7 @@ app.post("/webhook", (req, res) =>{
   miObjeto.BotResponde= "Soy un Bot"	
 
   var historial = JSON.stringify(miObjeto);
-  console.log(myString)
+  console.log(historial)
 	
 	
 	//Envio de Mensaje a Mongo Atlas
