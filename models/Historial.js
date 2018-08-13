@@ -1,26 +1,24 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const TaskSchema = new Schema({
-  result:{
-    resolvedQuery:{
+const HistorialSchema = new Schema({
+  SesionId:{
       type: String,
       required:true,
-    },
-    metadata:{
-      intentName:{
-        type: String,
-        required:true
-        }
-      },
-    fulfillment:{
-      speech:{
-        type: String,
-        required:true
-        }
-    }
   },
-  sessionId:{
+  UsuarioId:{
+        type: String,
+        required:true
+      },
+  UsuarioDice:{
+        type: String,
+        required:true
+  },
+  NombreIntento:{
+        type: String,
+        required:true
+  },
+  BotResponde:{
         type: String,
         required:true
   },
@@ -30,4 +28,4 @@ const TaskSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model("Tasks", TaskSchema);
+module.exports = mongoose.model("Historiales", HistorialSchema);
