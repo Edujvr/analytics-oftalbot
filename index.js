@@ -14,7 +14,7 @@ require("./config/db");
 
 //Creación del metodo que escucha las llamadas POST y obtiene los parametros
 app.post("/webhook", (req, res) =>{  
-  //console.log(req.body.originalRequest)	
+  //console.log(req.body)	
   const Colaboradores = require("./models/Colaboradores");
   const Historial = require("./models/Historial");
   const action = req.body.result.action;
