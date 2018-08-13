@@ -23,7 +23,7 @@ app.post("/webhook", (req, res) =>{
 	
   var historial = new Object();
   historial.SesionId = req.body.sessionId;
-  historial.UsuarioId = req.body.originalRequest.data.sender.facebook_sender_id;
+  historial.UsuarioId = req.body.originalRequest.data.sender.id;
   historial.UsuarioDice = req.body.result.resolvedQuery;
   historial.NombreIntento= req.body.result.metadata.intentName;
   historial.BotResponde= req.body.result.fulfillment.speech;	
