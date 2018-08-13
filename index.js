@@ -21,24 +21,22 @@ app.post("/webhook", (req, res) =>{
   const chatbase = require('@google/chatbase');
   const chatbase2= require('@google/chatbase');	
 	
-  var miObjeto = new Object();
-  miObjeto.SesionId = "1";
-  miObjeto.UsuarioId = 12;
-  miObjeto.UsuarioDice = "Quien eres";
-  miObjeto.NombreIntento= "Prueba"
-  miObjeto.BotResponde= "Soy un Bot"	
-
-  var historial = JSON.stringify(miObjeto);
+  var historial = new Object();
+  historial.SesionId = "1";
+  historial.UsuarioId = 12;
+  historial.UsuarioDice = "Quien eres";
+  historial.NombreIntento= "Prueba"
+  historial.BotResponde= "Soy un Bot"	
   console.log(historial)
 	
 	
 	//Envio de Mensaje a Mongo Atlas
-	let newHistorial = new Historial(miObjeto);
+	let newHistorial = new Historial(historial);
 	  newHistorial.save((err, task) => {
 	    if (err) {
 	      res.status(500).send(err);
 	    }
-	    res.status(201).json(miObjeto);
+	    res.status(201).json(historial);
 	  });
   /*	
 	// Creación mensaje Set de Usuario
