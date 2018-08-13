@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const TaskSchema = new Schema({
+const HistorialSchema = new Schema({
   result:{
     resolvedQuery:{
       type: String,
@@ -30,4 +30,4 @@ const TaskSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model("Tasks", TaskSchema);
+module.exports = mongoose.model("Historial", HistorialSchema);
