@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 app.listen(process.env.PORT || 8080);
 var request = require('request');
 const Colaboradores = require("./models/Colaboradores");
-
+const Colaboradores = require("./models/Historial");
 // db instance connection
 require("./config/db");
 
@@ -16,20 +16,29 @@ require("./config/db");
 app.post("/webhook", (req, res) =>{  
   //console.log(req.body.originalRequest)	
   const Colaboradores = require("./models/Colaboradores");
+  const Colaboradores = require("./models/Historial");
   const action = req.body.result.action;
   const chatbase = require('@google/chatbase');
   const chatbase2= require('@google/chatbase');	
 	
-	
+  var miObjeto = new Object();
+  miObjeto.SesionId = "1";
+  miObjeto.UsuarioId = 12;
+  miObjeto.UsuarioDice = "Quien eres";
+  miObjeto.NombreIntento= "Prueba"
+  miObjeto.BotResponde= "Soy un Bot"	
+
+  var historial = JSON.stringify(miObjeto);
+  console.log(myString)
 	
 	
 	//Envio de Mensaje a Mongo Atlas
-	let newTask = new Task(req.body);
+	let newHistorial = new Historial(historial);
 	  newTask.save((err, task) => {
 	    if (err) {
 	      res.status(500).send(err);
 	    }
-	    res.status(201).json(task);
+	    res.status(201).json(historial);
 	  });
   /*	
 	// Creación mensaje Set de Usuario
