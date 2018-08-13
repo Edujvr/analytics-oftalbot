@@ -3,11 +3,11 @@ const Schema = mongoose.Schema;
 
 const HistorialSchema = new Schema({
   SesionId:{
-      type: String,
+      type: Number,
       required:true,
   },
   UsuarioId:{
-        type: String,
+        type: Number,
         required:true
       },
   UsuarioDice:{
