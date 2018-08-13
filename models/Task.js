@@ -30,4 +30,4 @@ const TaskSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model("Historial", HistorialSchema);
+module.exports = mongoose.model("Tasks", TaskSchema);
