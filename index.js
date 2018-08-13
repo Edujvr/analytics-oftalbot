@@ -34,7 +34,7 @@ app.post("/webhook", (req, res) =>{
 	
 	//Envio de Mensaje a Mongo Atlas
 	let newHistorial = new Historial(miObjeto);
-	  newTask.save((err, task) => {
+	  newHistorial.save((err, task) => {
 	    if (err) {
 	      res.status(500).send(err);
 	    }
