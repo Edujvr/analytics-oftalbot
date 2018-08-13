@@ -24,9 +24,9 @@ app.post("/webhook", (req, res) =>{
   var historial = new Object();
   historial.SesionId = "1";
   historial.UsuarioId = 12;
-  historial.UsuarioDice = "Quien eres";
-  historial.NombreIntento= "Prueba"
-  historial.BotResponde= "Soy un Bot"	
+  historial.UsuarioDice = req.body.result.resolvedQuery;
+  historial.NombreIntento= req.body.result.metadata.intentName;
+  historial.BotResponde= req.body.result.fulfillment.speech;	
   console.log(historial)
 	
 	
