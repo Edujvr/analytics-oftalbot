@@ -20,7 +20,9 @@ app.post("/webhook", (req, res) =>{
   const action = req.body.result.action;
   const chatbase = require('@google/chatbase');
   const chatbase2= require('@google/chatbase');	
+
 	
+//Creción del Objeto Json para almacenar en Mongo Atlas
   var historial = new Object();
   historial.SesionId = req.body.sessionId;
   historial.UsuarioId = req.body.originalRequest.data.sender.id;
@@ -30,7 +32,7 @@ app.post("/webhook", (req, res) =>{
   console.log(historial)
 	
 	
-	//Envio de Mensaje a Mongo Atlas
+//Envio de objeto con mensaje a Mongo Atlas
 	let newHistorial = new Historial(historial);
 	  newHistorial.save((err, task) => {
 	    if (err) {
