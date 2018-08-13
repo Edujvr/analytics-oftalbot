@@ -28,4 +28,4 @@ const HistorialSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model("Historial", HistorialSchema);
+module.exports = mongoose.model("Historiales", HistorialSchema);
