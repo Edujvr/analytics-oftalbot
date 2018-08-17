@@ -40,7 +40,7 @@ app.post("/webhook", (req, res) =>{
 	    }
 	    res.status(201).json(historial);
 	  });
-  /*	
+	
 	// Creación mensaje Set de Usuario
 	var messageSet = chatbase.newMessageSet()
 	  .setApiKey("f8be6699-d8b4-44d8-90cb-07d8d2e98cf2") // Chatbase API key
@@ -146,8 +146,6 @@ app.post("/webhook", (req, res) =>{
 	      res.json(responseJson); // Enviar respuesta a Dialogflow
 	    }
 	  }
-	
-	*/
 	
     });
 	
