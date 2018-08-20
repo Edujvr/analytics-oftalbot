@@ -30,14 +30,9 @@ app.post("/webhook", (req, res) =>{
 			respuesta = colaboradores.Nombre +" Tu consultor es " + colaboradores.NombreConsultor //+" Tu nombre " +usuarioName
 			sendResponse(respuesta);
 		  });
-	 } else { //Envio de información directa webhook a Dialogflow		  
-	    res.json({
-		    messages: req.body.result.fulfillment.messages,
-		    speech: respuesta,
-		    displayText: respuesta,
-		    contextOut: req.body.result.contexts,
-		    source: req.body.result.source
-       		 });
+	 } else { //Envio de información directa webhook a Dialogflow			 
+		 respuesta = " Lo lamento no encontramos tu usuario en nuestra base por favor comunicate con INFO-RRHH " //+" Tu nombre " +usuarioName
+			sendResponse(respuesta);
 	 }
 		
 	
@@ -147,6 +142,14 @@ app.post("/webhook", (req, res) =>{
 	      res.json(responseJson); // Enviar respuesta a Dialogflow
 	    }
 	  }
+	
+		    res.json({
+		    messages: req.body.result.fulfillment.messages,
+		    speech: respuesta,
+		    displayText: respuesta,
+		    contextOut: req.body.result.contexts,
+		    source: req.body.result.source
+       		 });
 	
     });
 	
