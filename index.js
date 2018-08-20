@@ -106,7 +106,7 @@ app.post("/webhook", (req, res) =>{
 	  .setUserId(req.body.sessionId) // ID de usuario la misma que arriba
 	  .setTimestamp(Date.now().toString()) // Tiempo obtenido del sistema
 	  .setMessage(respuesta); // Mensaje de respuesta del Bot
-	
+	console.log(respuesta);
 	// Envio de mensaje a Chatbase
 	messageSet2.sendMessageSet()
 	  .then(messageSet => {
