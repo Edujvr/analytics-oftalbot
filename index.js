@@ -19,7 +19,7 @@ app.post("/webhook", (req, res) =>{
   const chatbase = require('@google/chatbase');
   const chatbase2= require('@google/chatbase');
   var respuesta = req.body.result.fulfillment.speech;
-	
+	/*
 	//Consulta nombre de Generalista en Mongo Atlas 
 	if(action=='query'){
 		var query  = Colaboradores.where({ UsuarioRed: req.body.result.parameters.UsuariosRed });
@@ -34,7 +34,7 @@ app.post("/webhook", (req, res) =>{
 		 respuesta = " Lo lamento no encontramos tu usuario en nuestra base por favor comunicate con INFO-RRHH " //+" Tu nombre " +usuarioName
 			sendResponse(respuesta);
 	 }
-		
+	*/	
 	
 //Creción del Objeto Json para almacenar en Mongo Atlas
   var historial = new Object();
