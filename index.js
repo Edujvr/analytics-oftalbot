@@ -50,7 +50,7 @@ app.post("/webhook", (req, res) =>{
   historial.NombreIntento= req.body.result.metadata.intentName;
   historial.BotResponde= respuesta;	
   //console.log(historial)
- console.log("Primer registro" respuesta);	
+ console.log("Primer registro"+ respuesta);	
 	
 //Envio de objeto con mensaje a Mongo Atlas
 	let newHistorial = new Historial(historial);
