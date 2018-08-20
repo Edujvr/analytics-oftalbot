@@ -19,7 +19,6 @@ app.post("/webhook", (req, res) =>{
   const chatbase = require('@google/chatbase');
   const chatbase2= require('@google/chatbase');
   var respuesta = req.body.result.fulfillment.speech;
-  var resConsulta;
 	
 	//Consulta nombre de Generalista en Mongo Atlas 
 	if(action=='query'){
@@ -29,10 +28,9 @@ app.post("/webhook", (req, res) =>{
 		      res.status(500).send(err);
 		    }
 			resConsulta = colaboradores.Nombre +" Tu consultor es " + colaboradores.NombreConsultor //+" Tu nombre " +usuarioName
-			respuesta=resConsulta;
-  			console.log("Atlas "+respuesta)
-			
+  			console.log("Atlas "+respuesta)		
 			sendResponse(respuesta);
+			sendAnalytics();
 		  });
 	 } else { //Envio de información directa webhook a Dialogflow		  
 	    res.json({
@@ -42,9 +40,10 @@ app.post("/webhook", (req, res) =>{
 		    contextOut: req.body.result.contexts,
 		    source: req.body.result.source
        		 });
+		 sendAnalytics();
 	 }
 		
-	
+function sendAnalytics (){
 //Creción del Objeto Json para almacenar en Mongo Atlas
   var historial = new Object();
   historial.SesionId = req.body.sessionId;
@@ -129,7 +128,7 @@ app.post("/webhook", (req, res) =>{
 	  	console.log('Successfully logged to GA , Response to Dialogflow');
         });	
 	
-	
+}
 	//Envio de información webhook a Dialogflow Messenger
          function sendResponse (responseToUser) {
 	    // Si la respuesta es una cadena, envíela como respuesta al usuario
