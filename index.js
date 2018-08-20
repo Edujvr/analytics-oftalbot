@@ -21,7 +21,7 @@ app.post("/webhook", (req, res) =>{
   var respuesta = req.body.result.fulfillment.speech;
 	
 	//Consulta nombre de Generalista en Mongo Atlas 
-	if(action=='query'){
+if(action=='query'){
 		var query  = Colaboradores.where({ UsuarioRed: req.body.result.parameters.UsuariosRed });
 		query.findOne(function (err, colaboradores) {
 		    if (err) {
@@ -42,15 +42,15 @@ app.post("/webhook", (req, res) =>{
 	 }
 		
 	
-//Creción del Objeto Json para almacenar en Mongo Atlas
-  var historial = new Object();
-  historial.SesionId = req.body.sessionId;
-  historial.UsuarioId = req.body.originalRequest.data.sender.id;
-  historial.UsuarioDice = req.body.result.resolvedQuery;
-  historial.NombreIntento= req.body.result.metadata.intentName;
-  historial.BotResponde= respuesta;	
-  //console.log(historial)
- console.log("Primer registro"+ respuesta);	
+	//Creción del Objeto Json para almacenar en Mongo Atlas
+	  var historial = new Object();
+	  historial.SesionId = req.body.sessionId;
+	  historial.UsuarioId = req.body.originalRequest.data.sender.id;
+	  historial.UsuarioDice = req.body.result.resolvedQuery;
+	  historial.NombreIntento= req.body.result.metadata.intentName;
+	  historial.BotResponde= respuesta;	
+	  //console.log(historial)
+	 console.log("Primer registro"+ respuesta);	
 	
 //Envio de objeto con mensaje a Mongo Atlas
 	let newHistorial = new Historial(historial);
