@@ -20,8 +20,6 @@ app.post("/webhook", (req, res) =>{
   const chatbase2= require('@google/chatbase');
   var respuesta = req.body.result.fulfillment.speech;
 	
-	console.log(req.body)
-	/*
 	//Consulta nombre de Generalista en Mongo Atlas 
 	if(action=='query'){
 		var query  = Colaboradores.where({ UsuarioRed: req.body.result.parameters.UsuariosRed });
@@ -32,11 +30,16 @@ app.post("/webhook", (req, res) =>{
 			respuesta = colaboradores.Nombre +" Tu consultor es " + colaboradores.NombreConsultor //+" Tu nombre " +usuarioName
 			sendResponse(respuesta);
 		  });
-	 } else { //Envio de información directa webhook a Dialogflow			 
-		 respuesta = " Lo lamento no encontramos tu usuario en nuestra base por favor comunicate con INFO-RRHH " //+" Tu nombre " +usuarioName
-			sendResponse(respuesta);
+	 } else { //Envio de información directa webhook a Dialogflow		  
+	    res.json({
+		    messages: req.body.result.fulfillment.messages,
+		    speech: respuesta,
+		    displayText: respuesta,
+		    contextOut: req.body.result.contexts,
+		    source: req.body.result.source
+       		 });
 	 }
-	*/	
+		
 	
 //Creción del Objeto Json para almacenar en Mongo Atlas
   var historial = new Object();
@@ -144,14 +147,6 @@ app.post("/webhook", (req, res) =>{
 	      res.json(responseJson); // Enviar respuesta a Dialogflow
 	    }
 	  }
-	
-		    res.json({
-		    messages: req.body.result.fulfillment.messages,
-		    speech: respuesta,
-		    displayText: respuesta,
-		    contextOut: req.body.result.contexts,
-		    source: req.body.result.source
-       		 });
 	
     });
 	
