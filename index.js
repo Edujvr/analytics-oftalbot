@@ -14,7 +14,7 @@ require("./config/db");
 
 //Creación del metodo que escucha las llamadas POST y obtiene los parametros
 app.post("/webhook", (req, res) =>{  
-  console.log(req.body.originalRequest)	
+ // console.log(req.body.originalRequest)	
   const action = req.body.result.action;
   const chatbase = require('@google/chatbase');
   const chatbase2= require('@google/chatbase');
@@ -48,8 +48,8 @@ app.post("/webhook", (req, res) =>{
   historial.UsuarioDice = req.body.result.resolvedQuery;
   historial.NombreIntento= req.body.result.metadata.intentName;
   historial.BotResponde= respuesta;	
-  console.log(historial)
-	
+  //console.log(historial)
+ console.log(respuesta)	;	
 	
 //Envio de objeto con mensaje a Mongo Atlas
 	let newHistorial = new Historial(historial);
@@ -106,7 +106,7 @@ app.post("/webhook", (req, res) =>{
 	  .setUserId(req.body.sessionId) // ID de usuario la misma que arriba
 	  .setTimestamp(Date.now().toString()) // Tiempo obtenido del sistema
 	  .setMessage(respuesta); // Mensaje de respuesta del Bot
-	console.log(respuesta);
+	
 	// Envio de mensaje a Chatbase
 	messageSet2.sendMessageSet()
 	  .then(messageSet => {
@@ -116,6 +116,7 @@ app.post("/webhook", (req, res) =>{
 	    console.error(error);
 	});
 		
+	console.log(respuesta);
 //Envio de información a Google Analytics libreria request
 	const url = 'https://www.google-analytics.com/collect?v=1&t=event&tid=UA-123508749-1&cid='+req.body.sessionId+'&dh=www.google-analytics.com&ec=Intento&ea='+req.body.result.metadata.intentName+'&el='+req.body.result.resolvedQuery+'&ev=1&aip=1';
 		request.get(encodeURI(url))
