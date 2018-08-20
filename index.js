@@ -205,9 +205,8 @@ app.post("/webhook", (req, res) =>{
 					console.log('Successfully logged to GA , Response to Dialogflow');
 				});	
 	 }
-		
 	
-	
+    });
 	//Envio de información webhook a Dialogflow Messenger
          function sendResponse (responseToUser) {
 	    // Si la respuesta es una cadena, envíela como respuesta al usuario
@@ -230,8 +229,6 @@ app.post("/webhook", (req, res) =>{
 	      res.json(responseJson); // Enviar respuesta a Dialogflow
 	    }
 	  }
-	
-    });
 	
 
 
