@@ -14,14 +14,14 @@ require("./config/db");
 
 //Creación del metodo que escucha las llamadas POST y obtiene los parametros
 app.post("/webhook", (req, res) =>{  
+  var respuesta = req.body.result.fulfillment.speech;
  // console.log(req.body.originalRequest)	
   const action = req.body.result.action;
   const chatbase = require('@google/chatbase');
   const chatbase2= require('@google/chatbase');
-  let respuesta = req.body.result.fulfillment.speech;
-	
+  
 	//Consulta nombre de Generalista en Mongo Atlas 
-if(action=='query'){
+	if(action=='query'){
 		var query  = Colaboradores.where({ UsuarioRed: req.body.result.parameters.UsuariosRed });
 		query.findOne(function (err, colaboradores) {
 		    if (err) {
