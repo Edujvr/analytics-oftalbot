@@ -19,6 +19,8 @@ app.post("/webhook", (req, res) =>{
   const chatbase = require('@google/chatbase');
   const chatbase2= require('@google/chatbase');
   var respuesta = req.body.result.fulfillment.speech;
+	
+	console.log(req.body)
 	/*
 	//Consulta nombre de Generalista en Mongo Atlas 
 	if(action=='query'){
