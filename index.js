@@ -29,7 +29,7 @@ app.post("/webhook", (req, res) =>{
 		    }
 			respuesta = colaboradores.Nombre +" Tu consultor es " + colaboradores.NombreConsultor //+" Tu nombre " +usuarioName
 			sendResponse(respuesta);
-			console.log(respuesta);
+			console.log("Atlas"+respuesta);
 		  });
 	 } else { //Envio de información directa webhook a Dialogflow		  
 	    res.json({
@@ -50,7 +50,7 @@ app.post("/webhook", (req, res) =>{
   historial.NombreIntento= req.body.result.metadata.intentName;
   historial.BotResponde= respuesta;	
   //console.log(historial)
- console.log(respuesta);	
+ console.log("Primer registro" respuesta);	
 	
 //Envio de objeto con mensaje a Mongo Atlas
 	let newHistorial = new Historial(historial);
