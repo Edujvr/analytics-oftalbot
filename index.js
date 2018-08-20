@@ -107,7 +107,7 @@ if(action=='query'){
 	  .setUserId(req.body.sessionId) // ID de usuario la misma que arriba
 	  .setTimestamp(Date.now().toString()) // Tiempo obtenido del sistema
 	  .setMessage(respuesta); // Mensaje de respuesta del Bot
-	
+	console.log("Ultimo registro "+respuesta);
 	// Envio de mensaje a Chatbase
 	messageSet2.sendMessageSet()
 	  .then(messageSet => {
@@ -117,7 +117,7 @@ if(action=='query'){
 	    console.error(error);
 	});
 		
-	console.log(respuesta);
+	
 //Envio de información a Google Analytics libreria request
 	const url = 'https://www.google-analytics.com/collect?v=1&t=event&tid=UA-123508749-1&cid='+req.body.sessionId+'&dh=www.google-analytics.com&ec=Intento&ea='+req.body.result.metadata.intentName+'&el='+req.body.result.resolvedQuery+'&ev=1&aip=1';
 		request.get(encodeURI(url))
