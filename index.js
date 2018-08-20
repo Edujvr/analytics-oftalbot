@@ -14,11 +14,12 @@ require("./config/db");
 
 //Creación del metodo que escucha las llamadas POST y obtiene los parametros
 app.post("/webhook", (req, res) =>{  
-  console.log(req.body.originalRequest)	
+ // console.log(req.body.originalRequest)	
   const action = req.body.result.action;
   const chatbase = require('@google/chatbase');
   const chatbase2= require('@google/chatbase');
   var respuesta = req.body.result.fulfillment.speech;
+  var resConsulta;
 	
 	//Consulta nombre de Generalista en Mongo Atlas 
 	if(action=='query'){
@@ -27,7 +28,10 @@ app.post("/webhook", (req, res) =>{
 		    if (err) {
 		      res.status(500).send(err);
 		    }
-			respuesta = colaboradores.Nombre +" Tu consultor es " + colaboradores.NombreConsultor //+" Tu nombre " +usuarioName
+			resConsulta = colaboradores.Nombre +" Tu consultor es " + colaboradores.NombreConsultor //+" Tu nombre " +usuarioName
+			respuesta=resConsulta;
+  			console.log("Atlas "+respuesta)
+			
 			sendResponse(respuesta);
 		  });
 	 } else { //Envio de información directa webhook a Dialogflow		  
@@ -48,7 +52,7 @@ app.post("/webhook", (req, res) =>{
   historial.UsuarioDice = req.body.result.resolvedQuery;
   historial.NombreIntento= req.body.result.metadata.intentName;
   historial.BotResponde= respuesta;	
-  console.log(historial)
+  //console.log(historial)
 	
 	
 //Envio de objeto con mensaje a Mongo Atlas
@@ -101,6 +105,7 @@ app.post("/webhook", (req, res) =>{
 	  .setVersion('1.0'); // La versión que el bot desplegado es
 	
 	// Mensaje del Bot
+	console.log("Ultima Res "+respuesta)
 	const botMessage = messageSet2.newMessage() // Crea una nueva instancia de Mensaje
 	  .setAsTypeAgent() // Marca como mensaje que viene del Bot
 	  .setUserId(req.body.sessionId) // ID de usuario la misma que arriba
