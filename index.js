@@ -27,7 +27,7 @@ app.post("/webhook", (req, res) =>{
 		    if (err) {
 		      res.status(500).send(err);
 		    }
-			resConsulta = colaboradores.Nombre +" Tu consultor es " + colaboradores.NombreConsultor //+" Tu nombre " +usuarioName
+			respuesta = colaboradores.Nombre +" Tu consultor es " + colaboradores.NombreConsultor //+" Tu nombre " +usuarioName
   			console.log("Atlas "+respuesta)		
 			sendResponse(respuesta);
 			sendAnalytics();
