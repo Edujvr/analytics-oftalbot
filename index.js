@@ -15,12 +15,31 @@ require("./config/db");
 //Creación del metodo que escucha las llamadas POST y obtiene los parametros
 app.post("/webhook", (req, res) =>{  
   console.log(req.body.originalRequest)	
-  const Colaboradores = require("./models/Colaboradores");
-  const Historial = require("./models/Historial");
   const action = req.body.result.action;
   const chatbase = require('@google/chatbase');
-  const chatbase2= require('@google/chatbase');	
-
+  const chatbase2= require('@google/chatbase');
+  var respuesta = req.body.result.fulfillment.speech;
+	
+	//Consulta nombre de Generalista en Mongo Atlas 
+	if(action=='query'){
+		var query  = Colaboradores.where({ UsuarioRed: req.body.result.parameters.UsuariosRed });
+		query.findOne(function (err, colaboradores) {
+		    if (err) {
+		      res.status(500).send(err);
+		    }
+			respuesta = colaboradores.Nombre +" Tu consultor es " + colaboradores.NombreConsultor //+" Tu nombre " +usuarioName
+			sendResponse(respuesta);
+		  });
+	 } else { //Envio de información directa webhook a Dialogflow		  
+	    res.json({
+		    messages: req.body.result.fulfillment.messages,
+		    speech: respuesta,
+		    displayText: respuesta,
+		    contextOut: req.body.result.contexts,
+		    source: req.body.result.source
+       		 });
+	 }
+		
 	
 //Creción del Objeto Json para almacenar en Mongo Atlas
   var historial = new Object();
@@ -28,7 +47,7 @@ app.post("/webhook", (req, res) =>{
   historial.UsuarioId = req.body.originalRequest.data.sender.id;
   historial.UsuarioDice = req.body.result.resolvedQuery;
   historial.NombreIntento= req.body.result.metadata.intentName;
-  historial.BotResponde= req.body.result.fulfillment.speech;	
+  historial.BotResponde= respuesta;	
   console.log(historial)
 	
 	
@@ -86,7 +105,7 @@ app.post("/webhook", (req, res) =>{
 	  .setAsTypeAgent() // Marca como mensaje que viene del Bot
 	  .setUserId(req.body.sessionId) // ID de usuario la misma que arriba
 	  .setTimestamp(Date.now().toString()) // Tiempo obtenido del sistema
-	  .setMessage(req.body.result.fulfillment.speech); // Mensaje de respuesta del Bot
+	  .setMessage(respuesta); // Mensaje de respuesta del Bot
 	
 	// Envio de mensaje a Chatbase
 	messageSet2.sendMessageSet()
@@ -105,24 +124,6 @@ app.post("/webhook", (req, res) =>{
 	  	console.log('Successfully logged to GA , Response to Dialogflow');
         });	
 	
-	if(action=='query'){
-		var query  = Colaboradores.where({ UsuarioRed: req.body.result.parameters.UsuariosRed });
-		query.findOne(function (err, colaboradores) {
-		    if (err) {
-		      res.status(500).send(err);
-		    }
-			var respuesta =colaboradores.Nombre +" Tu consultor es " + colaboradores.NombreConsultor //+" Tu nombre " +usuarioName
-			sendResponse(respuesta);
-		  });
-	 } else { //Envio de información webhook a Dialogflow		  
-	    res.json({
-		    messages: req.body.result.fulfillment.messages,
-		    speech: req.body.result.fulfillment.speech,
-		    displayText: req.body.result.fulfillment.speech,
-		    contextOut: req.body.result.contexts,
-		    source: req.body.result.source
-       		 });
-	 }
 	
 	//Envio de información webhook a Dialogflow Messenger
          function sendResponse (responseToUser) {
