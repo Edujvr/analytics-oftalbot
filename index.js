@@ -56,13 +56,11 @@ function sendAnalytics (){
 	
 //Envio de objeto con mensaje a Mongo Atlas
 	let newHistorial = new Historial(historial);
-	  newHistorial.save((err, task) => {
-	    if (err) {
-	      res.status(500).send(err);
-	    }
-	    res.status(201).json(historial);
-	  });
-	
+	  newHistorial.save(function (err) {
+	  if (err) return handleError(err);
+	  // saved!
+	});
+/*	
 	// Creación mensaje Set de Usuario
 	var messageSet = chatbase.newMessageSet()
 	  .setApiKey("f8be6699-d8b4-44d8-90cb-07d8d2e98cf2") // Chatbase API key
@@ -126,7 +124,7 @@ function sendAnalytics (){
        		.on('error', function(err){
           	if (err) throw err;
 	  	console.log('Successfully logged to GA , Response to Dialogflow');
-        });	
+        });	*/
 	
 }
 	//Envio de información webhook a Dialogflow Messenger
