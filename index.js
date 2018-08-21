@@ -13,8 +13,9 @@ const Historial = require("./models/Historial");
 require("./config/db");
 
 //Creación del metodo que escucha las llamadas POST y obtiene los parametros
-app.post("/webhook", (req, res) =>{  
- // console.log(req.body.originalRequest)	
+
+exports.webhook = (req, res) =>{  
+  console.log(req.body.originalRequest)	
   const action = req.body.result.action;
   const chatbase = require('@google/chatbase');
   const chatbase2= require('@google/chatbase');
@@ -28,7 +29,6 @@ app.post("/webhook", (req, res) =>{
 		      res.status(500).send(err);
 		    }
 			respuesta = colaboradores.Nombre +" Tu consultor es " + colaboradores.NombreConsultor //+" Tu nombre " +usuarioName
-  			console.log("Atlas "+respuesta)		
 			sendResponse(respuesta);
 			sendAnalytics();
 		  });
@@ -40,10 +40,11 @@ app.post("/webhook", (req, res) =>{
 		    contextOut: req.body.result.contexts,
 		    source: req.body.result.source
        		 });
-		 sendAnalytics();
+			sendAnalytics();
 	 }
 		
-function sendAnalytics (){
+
+function sendAnalytics () {	
 //Creción del Objeto Json para almacenar en Mongo Atlas
   var historial = new Object();
   historial.SesionId = req.body.sessionId;
@@ -51,7 +52,7 @@ function sendAnalytics (){
   historial.UsuarioDice = req.body.result.resolvedQuery;
   historial.NombreIntento= req.body.result.metadata.intentName;
   historial.BotResponde= respuesta;	
-  //console.log(historial)
+  console.log(historial)
 	
 	
 //Envio de objeto con mensaje a Mongo Atlas
@@ -60,18 +61,18 @@ function sendAnalytics (){
 	  if (err) return handleError(err);
 	  // saved!
 	});
-/*	
+	
 	// Creación mensaje Set de Usuario
 	var messageSet = chatbase.newMessageSet()
 	  .setApiKey("f8be6699-d8b4-44d8-90cb-07d8d2e98cf2") // Chatbase API key
-	  .setPlatform("Dialogflow") // Nombre de la Plataforma del Chat
+	  .setPlatform("Facebook") // Nombre de la Plataforma del Chat
 	  .setVersion('1.0'); // La versión que el bot desplegado es
 
 	// Mensaje del Usuario
 	if (action == "nothandled") {
 	messageSet.newMessage() // Crea una nueva instancia de Mensaje
 	  .setAsTypeUser() // Marca como mensaje que viene del Usuario
-	  .setUserId(req.body.sessionId) // ID de usuario en la plataforma de chat 
+	  .setUserId(req.body.originalRequest.data.sender.id) // ID de usuario en la plataforma de chat 
 	  .setTimestamp(Date.now().toString()) // Tiempo obtenido del sistema
 	  .setIntent(req.body.result.metadata.intentName) // La intención decodificada a partir del mensaje del usuario
 	  .setMessage(req.body.result.resolvedQuery) // Mensaje de Usuario
@@ -79,7 +80,7 @@ function sendAnalytics (){
 	} else {
 	  messageSet.newMessage() // Crea una nueva instancia de Mensaje
 	  .setAsTypeUser() // Marca como mensaje que viene del Usuario
-	  .setUserId(req.body.sessionId) // ID de usuario en la plataforma de chat 
+	  .setUserId(req.body.originalRequest.data.sender.id) // ID de usuario en la plataforma de chat 
 	  .setTimestamp(Date.now().toString()) // Tiempo obtenido del sistema
 	  .setIntent(req.body.result.metadata.intentName) // La intención decodificada a partir del mensaje del usuario
 	  .setMessage(req.body.result.resolvedQuery) // Mensaje de Usuario
@@ -98,14 +99,13 @@ function sendAnalytics (){
 	// Creación mensaje Set del Bot
 	var messageSet2 = chatbase.newMessageSet()
 	  .setApiKey("f8be6699-d8b4-44d8-90cb-07d8d2e98cf2") // Chatbase API key
-	  .setPlatform("Dialogflow") // Nombre de la Plataforma del Chat
+	  .setPlatform("Facebook") // Nombre de la Plataforma del Chat
 	  .setVersion('1.0'); // La versión que el bot desplegado es
 	
 	// Mensaje del Bot
-	console.log("Ultima Res "+respuesta)
 	const botMessage = messageSet2.newMessage() // Crea una nueva instancia de Mensaje
 	  .setAsTypeAgent() // Marca como mensaje que viene del Bot
-	  .setUserId(req.body.sessionId) // ID de usuario la misma que arriba
+	  .setUserId(req.body.originalRequest.data.sender.id) // ID de usuario la misma que arriba
 	  .setTimestamp(Date.now().toString()) // Tiempo obtenido del sistema
 	  .setMessage(respuesta); // Mensaje de respuesta del Bot
 	
@@ -119,14 +119,14 @@ function sendAnalytics (){
 	});
 		
 //Envio de información a Google Analytics libreria request
-	const url = 'https://www.google-analytics.com/collect?v=1&t=event&tid=UA-123508749-1&cid='+req.body.sessionId+'&dh=www.google-analytics.com&ec=Intento&ea='+req.body.result.metadata.intentName+'&el='+req.body.result.resolvedQuery+'&ev=1&aip=1';
+	const url = 'https://www.google-analytics.com/collect?v=1&t=event&tid=UA-123508749-1&cid='+req.body.originalRequest.data.sender.id+'&dh=www.google-analytics.com&ec=Intento&ea='+req.body.result.metadata.intentName+'&el='+req.body.result.resolvedQuery+'&ev=1&aip=1';
 		request.get(encodeURI(url))
        		.on('error', function(err){
           	if (err) throw err;
 	  	console.log('Successfully logged to GA , Response to Dialogflow');
-        });	*/
+        });	
 	
-}
+}	
 	//Envio de información webhook a Dialogflow Messenger
          function sendResponse (responseToUser) {
 	    // Si la respuesta es una cadena, envíela como respuesta al usuario
@@ -150,4 +150,4 @@ function sendAnalytics (){
 	    }
 	  }
 	
-    });
+    };
