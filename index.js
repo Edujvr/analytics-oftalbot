@@ -20,7 +20,10 @@ exports.webhook = (req, res) =>{
   const chatbase = require('@google/chatbase');
   const chatbase2= require('@google/chatbase');
   var respuesta = req.body.result.fulfillment.speech;
+  var idUsuario = req.body.originalRequest.data.sender.id;
 	
+	console.log(idUsuario);
+/*	
 	//Consulta nombre de Generalista en Mongo Atlas 
 	if(action=='query'){
 		var query  = Colaboradores.where({ UsuarioRed: req.body.result.parameters.UsuariosRed });
@@ -149,5 +152,7 @@ function sendAnalytics () {
 	      res.json(responseJson); // Enviar respuesta a Dialogflow
 	    }
 	  }
+	  
+	  */
 	
     };
