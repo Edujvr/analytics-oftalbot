@@ -16,15 +16,21 @@ require("./config/db");
 
 app.post("/webhook",(req, res) =>{  
  console.log("Entro al método");
-	
-  //console.log(req.body.originalRequest)	
+	res.json({
+		    messages: req.body.result.fulfillment.messages,
+		    speech: respuesta,
+		    displayText: respuesta,
+		    contextOut: req.body.result.contexts,
+		    source: req.body.result.source
+       		 });
+  console.log(req.body.originalRequest)	
   const action = req.body.result.action;
   const chatbase = require('@google/chatbase');
   const chatbase2= require('@google/chatbase');
   var respuesta = req.body.result.fulfillment.speech;
- // var idUsuario = req.body.originalRequest.data.sender.id;
+  var idUsuario = req.body.originalRequest.data.sender.id;
 	
-//	console.log(idUsuario);
+	console.log(idUsuario);
 /*	
 	//Consulta nombre de Generalista en Mongo Atlas 
 	if(action=='query'){
