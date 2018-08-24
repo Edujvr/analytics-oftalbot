@@ -40,7 +40,7 @@ app.post("/webhook",(req, res) =>{
 		console.log(res);
 	});
 	
-	console.log(graphObject)
+	console.log(graphObject.first_name)
 /*	
 	//Consulta nombre de Generalista en Mongo Atlas 
 	if(action=='query'){
