@@ -38,11 +38,9 @@ app.post("/webhook",(req, res) =>{
 			console.log(res);
 			nombre=res.first_name;
 			console.log(nombre);
-			sendDialogflow (req, res, nombre);
 		});
 	}
 	
-	function sendDialogflow (req, res, nombre) {
 	console.log(nombre);
 	res.json({
 		    messages: req.body.result.fulfillment.messages,
@@ -51,8 +49,7 @@ app.post("/webhook",(req, res) =>{
 		    contextOut: [{'name':'saludoarranque','lifespan':3,'parameters':{'nombre': nombre}}],
 		    source: req.body.result.source		    
        		 });
-	
-	}
+
 /*	
 	//Consulta nombre de Generalista en Mongo Atlas 
 	if(action=='query'){
