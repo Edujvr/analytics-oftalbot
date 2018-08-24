@@ -39,7 +39,7 @@ graph.setAccessToken(access_token);
 		console.log(res);
 	});
 	
-	console.log("Hola " graphObject.first_name)
+	console.log("Hola " + graphObject.first_name)
 /*	
 	//Consulta nombre de Generalista en Mongo Atlas 
 	if(action=='query'){
