@@ -30,19 +30,20 @@ app.post("/webhook",(req, res) =>{
   var respuesta = req.body.result.fulfillment.speech;
   //var idUsuario = req.body.originalRequest.data.sender.id;
   var idPrueba=	1718036691652143;
-	let graphObject;
+	var graphObject;
 	sendGraphFB();
-	console.log(graphObject.first_name)
+	
+	console.log(graphObject)
 	//console.log(idUsuario);
 	//console.log(idPrueba);
 	
 	function sendGraphFB () {
-	var access_token = 'EAAC67570ZAXABAO31zYcwvFFwh3QUYX6ooZAZBeCgMEd2HUZCQ9NrD9TZAZB4MLlPEWONcQ9iFzZC3i4lhUAefK0E3mzB0oASiDylrqZAYBgEH1fdSggl0bjJqHObGUvv0YVVRSr7N7taxZCsNmYDvqXhnUQOtcBuY3EuTYJgMMwEv87uGWMWfZAZAT3hZAIAPRrQrXLr3naRSZB2TAZDZD';
-	graph.setAccessToken(access_token);	
-	
-	graphObject = graph.get(idPrueba+"?fields=name,first_name,last_name", function(err, res){
-		console.log(res);
-	});
+		var access_token = 'EAAC67570ZAXABAO31zYcwvFFwh3QUYX6ooZAZBeCgMEd2HUZCQ9NrD9TZAZB4MLlPEWONcQ9iFzZC3i4lhUAefK0E3mzB0oASiDylrqZAYBgEH1fdSggl0bjJqHObGUvv0YVVRSr7N7taxZCsNmYDvqXhnUQOtcBuY3EuTYJgMMwEv87uGWMWfZAZAT3hZAIAPRrQrXLr3naRSZB2TAZDZD';
+		graph.setAccessToken(access_token);	
+
+		graphObject = graph.get(idPrueba+"?fields=name,first_name,last_name", function(err, res){
+			console.log(res);
+		});
 	}
 	
 /*	
