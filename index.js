@@ -1,5 +1,6 @@
 'use estrict'
 
+var graph = require('fbgraph')
 const express = require('express');
 const app = express();
 const bodyParser = require("body-parser");
@@ -29,8 +30,13 @@ app.post("/webhook",(req, res) =>{
   const chatbase2= require('@google/chatbase');
   var respuesta = req.body.result.fulfillment.speech;
   var idUsuario = req.body.originalRequest.data.sender.id;
-	
+  var idPrueba=	1718036691652143;
 	console.log(idUsuario);
+	console.log(idPrueba);
+	
+graph.setAccessToken(EAAC67570ZAXABAO31zYcwvFFwh3QUYX6ooZAZBeCgMEd2HUZCQ9NrD9TZAZB4MLlPEWONcQ9iFzZC3i4lhUAefK0E3mzB0oASiDylrqZAYBgEH1fdSggl0bjJqHObGUvv0YVVRSr7N7taxZCsNmYDvqXhnUQOtcBuY3EuTYJgMMwEv87uGWMWfZAZAT3hZAIAPRrQrXLr3naRSZB2TAZDZD);	
+	
+	
 /*	
 	//Consulta nombre de Generalista en Mongo Atlas 
 	if(action=='query'){
