@@ -30,7 +30,7 @@ app.post("/webhook",(req, res) =>{
   var respuesta = req.body.result.fulfillment.speech;
   //var idUsuario = req.body.originalRequest.data.sender.id;
   var idPrueba=	1718036691652143;
-	var graphObject;
+	let graphObject;
 	sendGraphFB();
 	console.log(graphObject.first_name)
 	//console.log(idUsuario);
