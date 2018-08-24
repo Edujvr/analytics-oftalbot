@@ -33,10 +33,12 @@ app.post("/webhook",(req, res) =>{
   var idPrueba=	1718036691652143;
 	//console.log(idUsuario);
 	console.log(idPrueba);
-	var access_token = EAAC67570ZAXABAO31zYcwvFFwh3QUYX6ooZAZBeCgMEd2HUZCQ9NrD9TZAZB4MLlPEWONcQ9iFzZC3i4lhUAefK0E3mzB0oASiDylrqZAYBgEH1fdSggl0bjJqHObGUvv0YVVRSr7N7taxZCsNmYDvqXhnUQOtcBuY3EuTYJgMMwEv87uGWMWfZAZAT3hZAIAPRrQrXLr3naRSZB2TAZDZD;
+	var access_token = 'EAAC67570ZAXABAO31zYcwvFFwh3QUYX6ooZAZBeCgMEd2HUZCQ9NrD9TZAZB4MLlPEWONcQ9iFzZC3i4lhUAefK0E3mzB0oASiDylrqZAYBgEH1fdSggl0bjJqHObGUvv0YVVRSr7N7taxZCsNmYDvqXhnUQOtcBuY3EuTYJgMMwEv87uGWMWfZAZAT3hZAIAPRrQrXLr3naRSZB2TAZDZD';
 graph.setAccessToken(access_token);	
 	
-	
+	var graphObject=graph.get("1718036691652143?fields=name,first_name,last_name", function(err, res){
+		console.log(res);
+	});
 /*	
 	//Consulta nombre de Generalista en Mongo Atlas 
 	if(action=='query'){
