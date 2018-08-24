@@ -41,7 +41,7 @@ app.post("/webhook",(req, res) =>{
 	}
 	
 	
-	
+	console.log(nombre);
 	res.json({
 		    messages: req.body.result.fulfillment.messages,
 		    speech: respuesta,
