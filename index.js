@@ -33,7 +33,7 @@ app.post("/webhook",(req, res) =>{
 	var graphObject;
 	sendGraphFB();
 	
-	console.log(graphObject)
+	console.log(graphObject.first_name)
 	//console.log(idUsuario);
 	//console.log(idPrueba);
 	
