@@ -32,8 +32,6 @@ app.post("/webhook",(req, res) =>{
   var idPrueba=	1718036691652143;
 	var graphObject;
 	sendGraphFB();
-	
-	console.log(graphObject.first_name)
 	//console.log(idUsuario);
 	//console.log(idPrueba);
 	
@@ -45,8 +43,6 @@ app.post("/webhook",(req, res) =>{
 			console.log(res);
 			return res;
 		});
-		
-		console.log(graphObject)
 	}
 	
 /*	
