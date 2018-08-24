@@ -26,6 +26,7 @@ app.post("/webhook",(req, res) =>{
 	var nombre;
 	var graphObject;
 	sendGraphFB();
+	sendDialogflow ();
 	//console.log(idUsuario);
 	//console.log(idPrueba);
 	
@@ -40,7 +41,7 @@ app.post("/webhook",(req, res) =>{
 		});
 	}
 	
-	
+	function sendDialogflow () {
 	console.log(nombre);
 	res.json({
 		    messages: req.body.result.fulfillment.messages,
@@ -50,7 +51,7 @@ app.post("/webhook",(req, res) =>{
 		    source: req.body.result.source		    
        		 });
 	
-	
+	}
 /*	
 	//Consulta nombre de Generalista en Mongo Atlas 
 	if(action=='query'){
