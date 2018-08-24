@@ -26,7 +26,7 @@ app.post("/webhook",(req, res) =>{
 	var nombre;
 	var graphObject;
 	sendGraphFB();
-	sendDialogflow ();
+	sendDialogflow (req, res);
 	//console.log(idUsuario);
 	//console.log(idPrueba);
 	
@@ -41,7 +41,7 @@ app.post("/webhook",(req, res) =>{
 		});
 	}
 	
-	function sendDialogflow () {
+	function sendDialogflow (req, res) {
 	console.log(nombre);
 	res.json({
 		    messages: req.body.result.fulfillment.messages,
