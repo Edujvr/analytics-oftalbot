@@ -23,6 +23,7 @@ app.post("/webhook",(req, res) =>{
   var respuesta = req.body.result.fulfillment.speech;
   //var idUsuario = req.body.originalRequest.data.sender.id;
   var idPrueba=	1718036691652143;
+	var nombre;
 	var graphObject;
 	sendGraphFB();
 	//console.log(idUsuario);
@@ -34,7 +35,8 @@ app.post("/webhook",(req, res) =>{
 
 		graphObject = graph.get(idPrueba+"?fields=name,first_name,last_name", function(err, res){
 			console.log(res);
-			return res;
+			nombre=res.first_name;
+			console.log(nombre);
 		});
 	}
 	
@@ -44,7 +46,7 @@ app.post("/webhook",(req, res) =>{
 		    messages: req.body.result.fulfillment.messages,
 		    speech: respuesta,
 		    displayText: respuesta,
-		    contextOut: [{'name':'saludoarranque','lifespan':3,'parameters':{'nombre': 'Anita'}}],
+		    contextOut: [{'name':'saludoarranque','lifespan':3,'parameters':{'nombre': nombre}}],
 		    source: req.body.result.source		    
        		 });
 	
