@@ -41,12 +41,11 @@ app.post("/webhook",(req, res) =>{
 		});
 	}
 	
-	console.log(nombre);
 	res.json({
 		    messages: req.body.result.fulfillment.messages,
 		    speech: respuesta,
 		    displayText: respuesta,
-		    contextOut: [{'name':'saludoarranque','lifespan':3,'parameters':{'nombre': nombre}}],
+		    contextOut: [{'name':'saludoarranque','lifespan':3,'parameters':{'nombre': 'Eduardo'}}],
 		    source: req.body.result.source		    
        		 });
 
