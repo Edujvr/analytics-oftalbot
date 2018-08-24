@@ -16,7 +16,6 @@ require("./config/db");
 //Creación del metodo que escucha las llamadas POST y obtiene los parametros
 
 app.post("/webhook",(req, res) =>{  
- console.log("Entro al método");
 	res.json({
 		    messages: req.body.result.fulfillment.messages,
 		    speech: respuesta,
@@ -24,7 +23,7 @@ app.post("/webhook",(req, res) =>{
 		    contextOut: req.body.result.contexts,
 		    source: req.body.result.source
        		 });
-  console.log(req.body.originalRequest)	
+  //console.log(req.body.originalRequest)	
   const action = req.body.result.action;
   const chatbase = require('@google/chatbase');
   const chatbase2= require('@google/chatbase');
