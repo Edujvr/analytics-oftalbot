@@ -38,6 +38,7 @@ app.post("/webhook",(req, res) =>{
 	
 	graphObject = graph.get(idPrueba+"?fields=name,first_name,last_name", function(err, res){
 		console.log(res);
+		console.log("hola"+res.first_name);
 	});
 	
 	console.log(graphObject.first_name)
