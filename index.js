@@ -16,13 +16,6 @@ require("./config/db");
 //Creación del metodo que escucha las llamadas POST y obtiene los parametros
 
 app.post("/webhook",(req, res) =>{  
-	res.json({
-		    messages: req.body.result.fulfillment.messages,
-		    speech: respuesta,
-		    displayText: respuesta,
-		    contextOut: req.body.result.contexts,
-		    source: req.body.result.source
-       		 });
   //console.log(req.body.originalRequest)	
   const action = req.body.result.action;
   const chatbase = require('@google/chatbase');
@@ -44,6 +37,18 @@ app.post("/webhook",(req, res) =>{
 			return res;
 		});
 	}
+	
+	
+	
+	res.json({
+		    messages: req.body.result.fulfillment.messages,
+		    speech: respuesta,
+		    displayText: respuesta,
+		    contextOut: req.body.result.contexts,
+		    source: req.body.result.source,
+		    nombre: "Anita"
+       		 });
+	
 	
 /*	
 	//Consulta nombre de Generalista en Mongo Atlas 
