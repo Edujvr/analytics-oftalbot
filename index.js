@@ -45,6 +45,8 @@ app.post("/webhook",(req, res) =>{
 			console.log(res);
 			return res;
 		});
+		
+		console.log(graphObject)
 	}
 	
 /*	
