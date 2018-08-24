@@ -39,6 +39,8 @@ graph.setAccessToken(access_token);
 	var graphObject=graph.get("1718036691652143?fields=name,first_name,last_name", function(err, res){
 		console.log(res);
 	});
+	
+	console.log("Hola " graphObject.first_name)
 /*	
 	//Consulta nombre de Generalista en Mongo Atlas 
 	if(action=='query'){
