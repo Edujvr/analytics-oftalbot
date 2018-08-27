@@ -82,7 +82,7 @@ app.post("/webhook",(req, res) =>{
 		//Creción del Objeto Json para almacenar en Mongo Atlas
 		  historial = new Object();
 		  historial.SesionId = req.body.sessionId;
-		  historial.UsuarioId = req.body.originalRequest.data.sender.id;
+		  historial.UsuarioId = idPrueba;
 		  historial.UsuarioDice = req.body.result.resolvedQuery;
 		  historial.NombreIntento= req.body.result.metadata.intentName;
 		  historial.BotResponde= respuesta;	
@@ -106,7 +106,7 @@ app.post("/webhook",(req, res) =>{
 	if (action == "nothandled") {
 	messageSet.newMessage() // Crea una nueva instancia de Mensaje
 	  .setAsTypeUser() // Marca como mensaje que viene del Usuario
-	  .setUserId(req.body.originalRequest.data.sender.id) // ID de usuario en la plataforma de chat 
+	  .setUserId(idPrueba) // ID de usuario en la plataforma de chat 
 	  .setTimestamp(Date.now().toString()) // Tiempo obtenido del sistema
 	  .setIntent(req.body.result.metadata.intentName) // La intención decodificada a partir del mensaje del usuario
 	  .setMessage(req.body.result.resolvedQuery) // Mensaje de Usuario
@@ -114,7 +114,7 @@ app.post("/webhook",(req, res) =>{
 	} else {
 	  messageSet.newMessage() // Crea una nueva instancia de Mensaje
 	  .setAsTypeUser() // Marca como mensaje que viene del Usuario
-	  .setUserId(req.body.originalRequest.data.sender.id) // ID de usuario en la plataforma de chat 
+	  .setUserId(idPrueba) // ID de usuario en la plataforma de chat 
 	  .setTimestamp(Date.now().toString()) // Tiempo obtenido del sistema
 	  .setIntent(req.body.result.metadata.intentName) // La intención decodificada a partir del mensaje del usuario
 	  .setMessage(req.body.result.resolvedQuery) // Mensaje de Usuario
