@@ -54,7 +54,7 @@ app.post("/webhook",(req, res) =>{
 		  });
 	 } else { //Envio de información directa webhook a Dialogflow	
 		 sendGraphFB ();
-		 console.log(nombre);
+		 console.log("Uno"+nombre);
 	    res.json({
 		    messages: req.body.result.fulfillment.messages,
 		    speech: respuesta,
@@ -72,7 +72,7 @@ app.post("/webhook",(req, res) =>{
 		graph.setAccessToken(access_token);	
 
 		graphObject = graph.get(idPrueba+"?fields=name,first_name,last_name", function(err, res){
-			console.log(res);
+			console.log("dos"+res);
 			nombre=res.first_name;
 			//console.log(nombre);
 		});
@@ -139,7 +139,7 @@ app.post("/webhook",(req, res) =>{
 	// Mensaje del Bot
 	const botMessage = messageSet2.newMessage() // Crea una nueva instancia de Mensaje
 	  .setAsTypeAgent() // Marca como mensaje que viene del Bot
-	  .setUserId(req.body.originalRequest.data.sender.id) // ID de usuario la misma que arriba
+	  .setUserId(idPrueba) // ID de usuario la misma que arriba
 	  .setTimestamp(Date.now().toString()) // Tiempo obtenido del sistema
 	  .setMessage(respuesta); // Mensaje de respuesta del Bot
 	
