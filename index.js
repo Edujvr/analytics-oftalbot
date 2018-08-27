@@ -93,7 +93,7 @@ function sendAnalytics () {
 	
 	// Creación mensaje Set de Usuario
 	var messageSet = chatbase.newMessageSet()
-	  .setApiKey("f8be6699-d8b4-44d8-90cb-07d8d2e98cf2") // Chatbase API key
+	  .setApiKey("9163cbc3-5ede-48f2-a96e-46d9d64b556f") // Chatbase API key
 	  .setPlatform("Facebook") // Nombre de la Plataforma del Chat
 	  .setVersion('1.0'); // La versión que el bot desplegado es
 
@@ -127,7 +127,7 @@ function sendAnalytics () {
 	
 	// Creación mensaje Set del Bot
 	var messageSet2 = chatbase.newMessageSet()
-	  .setApiKey("f8be6699-d8b4-44d8-90cb-07d8d2e98cf2") // Chatbase API key
+	  .setApiKey("9163cbc3-5ede-48f2-a96e-46d9d64b556f") // Chatbase API key
 	  .setPlatform("Facebook") // Nombre de la Plataforma del Chat
 	  .setVersion('1.0'); // La versión que el bot desplegado es
 	
