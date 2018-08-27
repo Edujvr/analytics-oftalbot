@@ -10,6 +10,9 @@ app.listen(process.env.PORT || 8080);
 var request = require('request');
 const Colaboradores = require("./models/Colaboradores");
 const Historial = require("./models/Historial");
+const chatbase = require('@google/chatbase');
+const chatbase2= require('@google/chatbase');
+
 // db instance connection
 require("./config/db");
 
@@ -18,28 +21,16 @@ require("./config/db");
 app.post("/webhook",(req, res) =>{  
   //console.log(req.body.originalRequest)	
   const action = req.body.result.action;
-  const chatbase = require('@google/chatbase');
-  const chatbase2= require('@google/chatbase');
+
   var respuesta = req.body.result.fulfillment.speech;
   //var idUsuario = req.body.originalRequest.data.sender.id;
   var idPrueba=	1718036691652143;
 	var nombre;
 	var graphObject;
+	var historial;
 	sendGraphFB();
 	
-	//console.log(idUsuario);
-	//console.log(idPrueba);
-	
-	function sendGraphFB () {
-		var access_token = 'EAAC67570ZAXABADg7Tt17wpNYZBXZBqcPChabyCpozrgT8bxLhF7vPGJkfVKx5pW5NWNcm5ZBeeAWcmesz5sv3auB1JWbevObpla81SHWJuahcZAJb7sJ0ewdukaQZC6cHMJYnK7ZBe2FnkH6PSex5ZCXQihPRmpzr7AHpunjW93YAZDZD';
-		graph.setAccessToken(access_token);	
-
-		graphObject = graph.get(idPrueba+"?fields=name,first_name,last_name", function(err, res){
-			console.log(res);
-			nombre=res.first_name;
-			console.log(nombre);
-		});
-	}
+/*
 	
 	res.json({
 		    messages: req.body.result.fulfillment.messages,
@@ -47,9 +38,9 @@ app.post("/webhook",(req, res) =>{
 		    displayText: respuesta,
 		    contextOut: [{'name':'saludoarranque','lifespan':3,'parameters':{'nombre': 'Eduardo'}}],
 		    source: req.body.result.source		    
-       		 });
+       		 });*/
 
-/*	
+	
 	//Consulta nombre de Generalista en Mongo Atlas 
 	if(action=='query'){
 		var query  = Colaboradores.where({ UsuarioRed: req.body.result.parameters.UsuariosRed });
@@ -61,36 +52,50 @@ app.post("/webhook",(req, res) =>{
 			sendResponse(respuesta);
 			sendAnalytics();
 		  });
-	 } else { //Envio de información directa webhook a Dialogflow		  
+	 } else { //Envio de información directa webhook a Dialogflow	
+		 sendGraphFB ();
+		 console.log(nombre);
 	    res.json({
 		    messages: req.body.result.fulfillment.messages,
 		    speech: respuesta,
 		    displayText: respuesta,
-		    contextOut: req.body.result.contexts,
+		    contextOut: [{'name':'saludoarranque','lifespan':3,'parameters':{'nombre': nombre}}],
+		    //contextOut: req.body.result.contexts,
 		    source: req.body.result.source
        		 });
 			sendAnalytics();
 	 }
-		
+	
+	
+	function sendGraphFB () {
+		var access_token = 'EAAC67570ZAXABADg7Tt17wpNYZBXZBqcPChabyCpozrgT8bxLhF7vPGJkfVKx5pW5NWNcm5ZBeeAWcmesz5sv3auB1JWbevObpla81SHWJuahcZAJb7sJ0ewdukaQZC6cHMJYnK7ZBe2FnkH6PSex5ZCXQihPRmpzr7AHpunjW93YAZDZD';
+		graph.setAccessToken(access_token);	
 
-function sendAnalytics () {	
-//Creción del Objeto Json para almacenar en Mongo Atlas
-  var historial = new Object();
-  historial.SesionId = req.body.sessionId;
-  historial.UsuarioId = req.body.originalRequest.data.sender.id;
-  historial.UsuarioDice = req.body.result.resolvedQuery;
-  historial.NombreIntento= req.body.result.metadata.intentName;
-  historial.BotResponde= respuesta;	
-  console.log(historial)
+		graphObject = graph.get(idPrueba+"?fields=name,first_name,last_name", function(err, res){
+			console.log(res);
+			nombre=res.first_name;
+			//console.log(nombre);
+		});
+	}
 	
+	function sendAnalytics () {	
+		//Creción del Objeto Json para almacenar en Mongo Atlas
+		  historial = new Object();
+		  historial.SesionId = req.body.sessionId;
+		  historial.UsuarioId = req.body.originalRequest.data.sender.id;
+		  historial.UsuarioDice = req.body.result.resolvedQuery;
+		  historial.NombreIntento= req.body.result.metadata.intentName;
+		  historial.BotResponde= respuesta;	
+		  console.log(historial)
 	
-//Envio de objeto con mensaje a Mongo Atlas
-	let newHistorial = new Historial(historial);
-	  newHistorial.save(function (err) {
-	  if (err) return handleError(err);
-	  // saved!
-	});
-	
+	/*
+	//Envio de objeto con mensaje a Mongo Atlas
+		let newHistorial = new Historial(historial);
+		  newHistorial.save(function (err) {
+		  if (err) return handleError(err);
+		  // saved!
+		});
+	*/
 	// Creación mensaje Set de Usuario
 	var messageSet = chatbase.newMessageSet()
 	  .setApiKey("9163cbc3-5ede-48f2-a96e-46d9d64b556f") // Chatbase API key
@@ -146,16 +151,19 @@ function sendAnalytics () {
 	  .catch(error => {
 	    console.error(error);
 	});
-		
-//Envio de información a Google Analytics libreria request
+	/*	
+	//Envio de información a Google Analytics libreria request
 	const url = 'https://www.google-analytics.com/collect?v=1&t=event&tid=UA-123508749-1&cid='+req.body.originalRequest.data.sender.id+'&dh=www.google-analytics.com&ec=Intento&ea='+req.body.result.metadata.intentName+'&el='+req.body.result.resolvedQuery+'&ev=1&aip=1';
 		request.get(encodeURI(url))
        		.on('error', function(err){
           	if (err) throw err;
 	  	console.log('Successfully logged to GA , Response to Dialogflow');
         });	
+	*/
 	
-}	
+	}	
+	
+	
 	//Envio de información webhook a Dialogflow Messenger
          function sendResponse (responseToUser) {
 	    // Si la respuesta es una cadena, envíela como respuesta al usuario
@@ -178,7 +186,4 @@ function sendAnalytics () {
 	      res.json(responseJson); // Enviar respuesta a Dialogflow
 	    }
 	  }
-	  
-	  */
-	
     });
