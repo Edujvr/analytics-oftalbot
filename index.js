@@ -28,7 +28,7 @@ app.post("/webhook",(req, res) =>{
 	var nombre;
 	var graphObject;
 	var historial;
-	sendGraphFB();
+	//sendGraphFB();
 	
 /*
 	
