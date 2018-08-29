@@ -53,14 +53,14 @@ app.post("/webhook",(req, res) =>{
 			sendAnalytics();
 		  });
 	 } else { //Envio de información directa webhook a Dialogflow	
-		 sendGraphFB ();
-		 console.log("Uno"+nombre);
+		// sendGraphFB ();
+		// console.log("Uno"+nombre);
 	    res.json({
 		    messages: req.body.result.fulfillment.messages,
 		    speech: respuesta,
 		    displayText: respuesta,
-		    contextOut: [{'name':'saludoarranque','lifespan':3,'parameters':{'nombre': nombre}}],
-		    //contextOut: req.body.result.contexts,
+		    //contextOut: [{'name':'saludoarranque','lifespan':3,'parameters':{'nombre': nombre}}],
+		    contextOut: req.body.result.contexts,
 		    source: req.body.result.source
        		 });
 			sendAnalytics();
