@@ -59,14 +59,13 @@ app.post("/webhook",(req, res) =>{
 		    messages: req.body.result.fulfillment.messages,
 		    speech: respuesta,
 		    displayText: respuesta,
-		    //contextOut: [{'name':'saludoarranque','lifespan':3,'parameters':{'nombre': nombre}}],
 		    contextOut: req.body.result.contexts,
 		    source: req.body.result.source
        		 });
 			sendAnalytics();
 	 }
-	
-	
+	/*
+	//contextOut: [{'name':'saludoarranque','lifespan':3,'parameters':{'nombre': nombre}}],
 	function sendGraphFB () {
 		var access_token = 'EAAC67570ZAXABADg7Tt17wpNYZBXZBqcPChabyCpozrgT8bxLhF7vPGJkfVKx5pW5NWNcm5ZBeeAWcmesz5sv3auB1JWbevObpla81SHWJuahcZAJb7sJ0ewdukaQZC6cHMJYnK7ZBe2FnkH6PSex5ZCXQihPRmpzr7AHpunjW93YAZDZD';
 		graph.setAccessToken(access_token);	
@@ -76,7 +75,7 @@ app.post("/webhook",(req, res) =>{
 			nombre=res.first_name;
 			//console.log(nombre);
 		});
-	}
+	}*/
 	
 	function sendAnalytics () {	
 		//Creción del Objeto Json para almacenar en Mongo Atlas
