@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.listen(process.env.PORT || 8080);
-va77r request = require('request');
+var request = require('request');
 const Colaboradores = require("./models/Colaboradores");
 const Historial = require("./models/Historial");
 // db instance connection
