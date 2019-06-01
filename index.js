@@ -27,7 +27,7 @@ app.post("/webhook",(req, res) =>{
 //	var graphObject;
 //	sendGraphFB();
 	
-	console.log(req.body.originalDetectIntentRequest)
+	console.log(req.body.originalDetectIntentRequest..payload.message.attachments)
 	
 	//console.log(idUsuario);
 	//console.log(idPrueba);
