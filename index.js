@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.listen(process.env.PORT || 8080);
-var request = require('request');
+va77r request = require('request');
 const Colaboradores = require("./models/Colaboradores");
 const Historial = require("./models/Historial");
 // db instance connection
@@ -17,7 +17,7 @@ require("./config/db");
 
 app.post("/webhook",(req, res) =>{  
   //console.log(req.body.originalRequest)	
-  const action = req.body.result.action;
+ // const action = req.body.result.action;
  // const chatbase = require('@google/chatbase');
  // const chatbase2= require('@google/chatbase');
  // var respuesta = req.body.result.fulfillment.speech;
