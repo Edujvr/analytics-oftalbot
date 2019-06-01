@@ -27,9 +27,11 @@ app.post("/webhook",(req, res) =>{
 	var graphObject;
 	sendGraphFB();
 	
+	console.log(req.body.originalRequest)
+	
 	//console.log(idUsuario);
 	//console.log(idPrueba);
-	
+	/*
 	function sendGraphFB () {
 		var access_token = 'EAAC67570ZAXABADg7Tt17wpNYZBXZBqcPChabyCpozrgT8bxLhF7vPGJkfVKx5pW5NWNcm5ZBeeAWcmesz5sv3auB1JWbevObpla81SHWJuahcZAJb7sJ0ewdukaQZC6cHMJYnK7ZBe2FnkH6PSex5ZCXQihPRmpzr7AHpunjW93YAZDZD';
 		graph.setAccessToken(access_token);	
@@ -48,7 +50,7 @@ app.post("/webhook",(req, res) =>{
 		    contextOut: [{'name':'saludoarranque','lifespan':3,'parameters':{'nombre': 'Eduardo'}}],
 		    source: req.body.result.source		    
        		 });
-
+/*
 /*	
 	//Consulta nombre de Generalista en Mongo Atlas 
 	if(action=='query'){
