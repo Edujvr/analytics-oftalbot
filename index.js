@@ -18,16 +18,16 @@ require("./config/db");
 app.post("/webhook",(req, res) =>{  
   //console.log(req.body.originalRequest)	
   const action = req.body.result.action;
-  const chatbase = require('@google/chatbase');
-  const chatbase2= require('@google/chatbase');
-  var respuesta = req.body.result.fulfillment.speech;
+ // const chatbase = require('@google/chatbase');
+ // const chatbase2= require('@google/chatbase');
+ // var respuesta = req.body.result.fulfillment.speech;
   //var idUsuario = req.body.originalRequest.data.sender.id;
-  var idPrueba=	1718036691652143;
-	var nombre;
-	var graphObject;
-	sendGraphFB();
+  //var idPrueba=	1718036691652143;
+//	var nombre;
+//	var graphObject;
+//	sendGraphFB();
 	
-	console.log(req.body.originalRequest)
+	console.log(req.body)
 	
 	//console.log(idUsuario);
 	//console.log(idPrueba);
