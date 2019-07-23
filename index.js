@@ -32,16 +32,6 @@ app.post("/webhook",(req, res) =>{
 	//console.log(idUsuario);
 	//console.log(idPrueba);
 	/*
-	function sendGraphFB () {
-		var access_token = 'EAAC67570ZAXABADg7Tt17wpNYZBXZBqcPChabyCpozrgT8bxLhF7vPGJkfVKx5pW5NWNcm5ZBeeAWcmesz5sv3auB1JWbevObpla81SHWJuahcZAJb7sJ0ewdukaQZC6cHMJYnK7ZBe2FnkH6PSex5ZCXQihPRmpzr7AHpunjW93YAZDZD';
-		graph.setAccessToken(access_token);	
-
-		graphObject = graph.get(idPrueba+"?fields=name,first_name,last_name", function(err, res){
-			console.log(res);
-			nombre=res.first_name;
-			console.log(nombre);
-		});
-	}
 	
 	res.json({
 		    messages: req.body.result.fulfillment.messages,
@@ -94,7 +84,7 @@ function sendAnalytics () {
 	
 	// Creación mensaje Set de Usuario
 	var messageSet = chatbase.newMessageSet()
-	  .setApiKey("9163cbc3-5ede-48f2-a96e-46d9d64b556f") // Chatbase API key
+	  .setApiKey("") // Chatbase API key
 	  .setPlatform("Facebook") // Nombre de la Plataforma del Chat
 	  .setVersion('1.0'); // La versión que el bot desplegado es
 	// Mensaje del Usuario
@@ -126,7 +116,7 @@ function sendAnalytics () {
 	
 	// Creación mensaje Set del Bot
 	var messageSet2 = chatbase.newMessageSet()
-	  .setApiKey("9163cbc3-5ede-48f2-a96e-46d9d64b556f") // Chatbase API key
+	  .setApiKey("") // Chatbase API key
 	  .setPlatform("Facebook") // Nombre de la Plataforma del Chat
 	  .setVersion('1.0'); // La versión que el bot desplegado es
 	
